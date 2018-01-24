@@ -7,12 +7,20 @@ public class PlayerInteraction : MonoBehaviour
 {
 
     public bool InteractEvent = true;
+    public bool MoveEntitiys = true;
+    public float VelocityRatio;
 
     private Player player;
     private Ray interactRay;
     private Ray itemInteractRay;
     private RaycastHit interactHit;
     private RaycastHit itemInteractHit;
+
+    private MoveableEntity _grabbedEntity;
+    private Vector3 _newMovePoint;
+    private Vector3 _offset;
+    private float _velocityClamp = 10;
+    private Vector3 _newVelocity;
 
     public void Start()
     {
@@ -41,6 +49,23 @@ public class PlayerInteraction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Ui.Escape();
+        }
+
+        //Entity Moving
+        if (Input.GetMouseButtonDown(1))
+        {
+            MoveEntity();
+        }
+    }
+
+    public void FixedUpdate()
+    {
+        if (_grabbedEntity != null)
+        {
+            _newMovePoint = player.camera.transform.TransformPoint(_offset);
+            _newVelocity = (_newMovePoint - _grabbedEntity.transform.position) * VelocityRatio;
+            _newVelocity = new Vector3(Mathf.Clamp(_newVelocity.x, -_velocityClamp, _velocityClamp), Mathf.Clamp(_newVelocity.y, -_velocityClamp, _velocityClamp), Mathf.Clamp(_newVelocity.z, -_velocityClamp, _velocityClamp));
+            _grabbedEntity.GetComponent<Rigidbody>().velocity = _newVelocity;
         }
     }
 
@@ -76,4 +101,21 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+    void MoveEntity()
+    {
+        if (MoveEntitiys)
+        {
+            itemInteractRay = new Ray(player.camera.transform.position, player.camera.transform.forward);
+            if (Physics.Raycast(itemInteractRay, out itemInteractHit, 5f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
+            {
+                MoveableEntity grabbedEntity =
+                    itemInteractHit.transform.GetComponent<MoveableEntity>() ??
+                    itemInteractHit.transform.GetComponentInParent<MoveableEntity>();
+                if (grabbedEntity != null)
+                {
+                    _offset = player.camera.transform.InverseTransformPoint(grabbedEntity.transform.position);
+                }
+            }
+        }
+    }
 }
