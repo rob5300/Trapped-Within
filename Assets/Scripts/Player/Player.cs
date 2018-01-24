@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
     public GameObject HeldObject;
     public PlayerMovement movement;
     public Inventory inventory;
+    public TaskManager TaskManager;
 
     public Player()
     {
