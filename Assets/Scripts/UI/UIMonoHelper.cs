@@ -9,6 +9,12 @@ public class UIMonoHelper : MonoBehaviour
     public GameObject PauseParent;
 
     public GameObject InventoryParent;
+
+    public GameObject TasksParent;
+    public Text CurrentTaskText;
+    public Transform CompletedTaskParent;
+    public GameObject CompletedTaskPanel;
+
     public GameObject FilledItemSlot;
     public GameObject EmptyItemSlot;
     public Transform ItemHolder;
