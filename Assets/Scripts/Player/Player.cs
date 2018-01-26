@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
     {
         instance = this;
         inventory = new Inventory(8, this);
+        TaskManager = new TaskManager(Game.InitialTask);
     }
 
     public void Awake()

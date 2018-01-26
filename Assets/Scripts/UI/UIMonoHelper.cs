@@ -10,7 +10,7 @@ public class UIMonoHelper : MonoBehaviour
 
     public GameObject InventoryParent;
 
-    public GameObject TasksParent;
+    public GameObject TaskLogParent;
     public Text CurrentTaskText;
     public Transform CompletedTaskParent;
     public GameObject CompletedTaskPanel;
@@ -36,6 +36,11 @@ public class UIMonoHelper : MonoBehaviour
     public void Craft()
     {
         Ui.AttemptCraft();
+    }
+
+    public void ShowTaskHistory()
+    {
+        Ui.ShowTaskHistory();
     }
 
     public void UnpauseButton()

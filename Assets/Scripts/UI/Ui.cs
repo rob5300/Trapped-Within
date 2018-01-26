@@ -13,7 +13,7 @@ public static class Ui
     private static List<int> _selectedSlots = new List<int>();
     public static List<EventHandler<EventArgs>> EscapeEvents = new List<EventHandler<EventArgs>>();
 
-    //EventHandlers
+    //EventHandlers for EscapeEvents
     private static readonly EventHandler<EventArgs> _inventoryEventHandle = HideInventory;
 
     public static void Escape()
@@ -143,6 +143,15 @@ public static class Ui
         Player.instance.movement.DoRotation = true;
 
         if (EscapeEvents.Contains(_inventoryEventHandle)) EscapeEvents.Remove(_inventoryEventHandle);
+    }
+
+    public static void ShowTaskHistory()
+    {
+         UIMonoHelper.Instance.TaskLogParent.SetActive(true);
+        if (Player.instance.TaskManager.PastIsDirty)
+        {
+            
+        }
     }
 
     public static void AttemptCraft()
