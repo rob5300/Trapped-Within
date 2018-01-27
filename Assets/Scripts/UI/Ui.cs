@@ -9,12 +9,17 @@ public static class Ui
     public static bool InventoryVisible = false;
     public static bool PauseMenuVisible = false;
 
-    private static List<GameObject> _slots = new List<GameObject>();
+    private static List<GameObject> _inventorySlots = new List<GameObject>();
     private static List<int> _selectedSlots = new List<int>();
+    private static List<GameObject> _pastTaskPanels = new List<GameObject>();
+    private static Char _speechMarks = '"';
+
     public static List<EventHandler<EventArgs>> EscapeEvents = new List<EventHandler<EventArgs>>();
+    public static List<EventHandler<EventArgs>> ExtraWindowEvents = new List<EventHandler<EventArgs>>();
 
     //EventHandlers for EscapeEvents
     private static readonly EventHandler<EventArgs> _inventoryEventHandle = HideInventory;
+    private static readonly EventHandler<EventArgs> _taskLogEventHandle = HideTaskHistory;
 
     public static void Escape()
     {
@@ -24,7 +29,7 @@ public static class Ui
         }
         else
         {
-            EscapeEvents[EscapeEvents.Count - 1].Invoke(null, null);
+            EscapeEvents[EscapeEvents.Count - 1].Invoke(null, EventArgs.Empty);
         }
     }
 
@@ -65,6 +70,8 @@ public static class Ui
     public static void PopulateInventory()
     {
         List<ItemSlot> itemslots = Player.instance.inventory.GetItemSlots();
+        //Set the capacity to prevent constant resizing.
+        _inventorySlots.Capacity = itemslots.Count;
         foreach (ItemSlot slot in itemslots)
         {
             //Item slot is not empty
@@ -73,10 +80,14 @@ public static class Ui
                 GameObject newSlot = Object.Instantiate(UIMonoHelper.Instance.FilledItemSlot, UIMonoHelper.Instance.ItemHolder);
                 newSlot.GetComponent<UIFilledSlot>().Slot = slot.Number;
                 newSlot.GetComponent<UIFilledSlot>().Name.text = slot.Item.Name;
+
                 if (slot.Number == Player.instance.inventory.EquippedItem)
                     newSlot.GetComponent<UIFilledSlot>().EquipButton.interactable = false;
+
                 newSlot.SetActive(true);
-                _slots.Add(newSlot);
+                _inventorySlots.Add(newSlot);
+                //Remove the object to save memory, its no longer needed.
+                Object.Destroy(newSlot.GetComponent<UIFilledSlot>());
             }
             //Slot is empty
             else
@@ -84,7 +95,7 @@ public static class Ui
                 GameObject newSlot = Object.Instantiate(UIMonoHelper.Instance.EmptyItemSlot, UIMonoHelper.Instance.ItemHolder);
                 newSlot.name = slot.Number.ToString();
                 newSlot.SetActive(true);
-                _slots.Add(newSlot);
+                _inventorySlots.Add(newSlot);
             }
         }
 
@@ -94,11 +105,11 @@ public static class Ui
     public static void CleanInventory()
     {
         //Destroy all slots.
-        for (int slotno = _slots.Count - 1; slotno > -1; slotno--)
+        for (int slotno = _inventorySlots.Count - 1; slotno > -1; slotno--)
         {
-            Object.Destroy(_slots[slotno]);
+            Object.Destroy(_inventorySlots[slotno]);
         }
-        _slots = new List<GameObject>();
+        _inventorySlots.Clear();
     }
 
     public static void ToggleInventory()
@@ -109,11 +120,20 @@ public static class Ui
 
     public static void ShowInventory()
     {
+        //Update depending on dirty states
         if (Player.instance.inventory.IsDirty)
         {
             CleanInventory();
             PopulateInventory();
         }
+        if (Player.instance.TaskManager.CurrentIsDirty)
+        {
+            UpdateCurrenTask();
+        }
+
+        //Check if we have any tasks in the history. If soo we enable the button. This is done in this manor to allow for save states in future.
+        UIMonoHelper.Instance.TaskLogButton.interactable = Player.instance.TaskManager.PastTasks.Count != 0;
+
         UIMonoHelper.Instance.InventoryParent.SetActive(true);
         InventoryVisible = true;
         ShowCursor();
@@ -128,7 +148,7 @@ public static class Ui
     {
         UIMonoHelper.Instance.InventoryParent.SetActive(false);
         _selectedSlots = new List<int>();
-        foreach (GameObject uislot in _slots)
+        foreach (GameObject uislot in _inventorySlots)
         {
             UIFilledSlot fslot = uislot.GetComponent<UIFilledSlot>();
             if (fslot != null)
@@ -147,11 +167,43 @@ public static class Ui
 
     public static void ShowTaskHistory()
     {
-         UIMonoHelper.Instance.TaskLogParent.SetActive(true);
+        UIMonoHelper.Instance.TaskLogParent.SetActive(true);
+        EscapeEvents.Add(_taskLogEventHandle);
         if (Player.instance.TaskManager.PastIsDirty)
         {
-            
+            GameObject newTaskPanel;
+            UIPastTaskPanel newTaskPanelComponent;
+            Task pastTask;
+
+            //Set capacity to prevent resizing. Optimisation!
+            _pastTaskPanels.Capacity = Player.instance.TaskManager.PastTasks.Count;
+
+            for(int i = _pastTaskPanels.Count; i < Player.instance.TaskManager.PastTasks.Count; i++)
+            {
+                pastTask = Player.instance.TaskManager.PastTasks[i];
+                newTaskPanel = Object.Instantiate(UIMonoHelper.Instance.CompletedTaskPanel, UIMonoHelper.Instance.CompletedTaskParent);
+                newTaskPanelComponent = newTaskPanel.GetComponent<UIPastTaskPanel>();
+                newTaskPanelComponent.TaskTitle.text = _speechMarks + pastTask.Name + _speechMarks;
+                newTaskPanelComponent.TaskDescription.text = pastTask.Description;
+                newTaskPanel.SetActive(true);
+                _pastTaskPanels.Add(newTaskPanel);
+                Object.Destroy(newTaskPanelComponent); 
+            }
+            Player.instance.TaskManager.PastIsDirty = false;
         }
+    }
+
+    public static void HideTaskHistory(object sender, EventArgs args)
+    {
+        UIMonoHelper.Instance.TaskLogParent.SetActive(false);
+        if (EscapeEvents.Contains(_taskLogEventHandle)) EscapeEvents.Remove(_taskLogEventHandle);
+    }
+
+    private static void UpdateCurrenTask()
+    {
+        UIMonoHelper.Instance.CurrentTaskText.text = Player.instance.TaskManager.CurrentTask.Description;
+        UIMonoHelper.Instance.CurrentTaskName.text = _speechMarks + Player.instance.TaskManager.CurrentTask.Name + _speechMarks;
+        Player.instance.TaskManager.CurrentIsDirty = false;
     }
 
     public static void AttemptCraft()
@@ -166,7 +218,7 @@ public static class Ui
             }
             else
             {
-                foreach (GameObject uislot in _slots)
+                foreach (GameObject uislot in _inventorySlots)
                 {
                     UIFilledSlot fslot = uislot.GetComponent<UIFilledSlot>();
                     if (fslot != null)

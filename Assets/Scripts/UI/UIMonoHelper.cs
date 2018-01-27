@@ -11,9 +11,12 @@ public class UIMonoHelper : MonoBehaviour
     public GameObject InventoryParent;
 
     public GameObject TaskLogParent;
+    public Text CurrentTaskName;
     public Text CurrentTaskText;
+
     public Transform CompletedTaskParent;
     public GameObject CompletedTaskPanel;
+    public Button TaskLogButton;
 
     public GameObject FilledItemSlot;
     public GameObject EmptyItemSlot;
@@ -30,6 +33,8 @@ public class UIMonoHelper : MonoBehaviour
         FilledItemSlot.SetActive(false);
         EmptyItemSlot.SetActive(false);
         InventoryParent.SetActive(false);
+        CompletedTaskPanel.SetActive(false);
+        TaskLogParent.SetActive(false);
         PauseParent.SetActive(false);
     }
 
@@ -41,6 +46,11 @@ public class UIMonoHelper : MonoBehaviour
     public void ShowTaskHistory()
     {
         Ui.ShowTaskHistory();
+    }
+
+    public void HideTaskHistory()
+    {
+        Ui.HideTaskHistory(this, EventArgs.Empty);
     }
 
     public void UnpauseButton()

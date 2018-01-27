@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class Game {
 
-    public static Task InitialTask = new Task("01", "Find a way to escape the room.");
+    public static Task InitialTask = new Task("How did i get here?", "Find a way to escape the room.");
 
     public static void Pause()
     {
