@@ -163,12 +163,14 @@ public static class Ui
         Player.instance.movement.DoRotation = true;
 
         if (EscapeEvents.Contains(_inventoryEventHandle)) EscapeEvents.Remove(_inventoryEventHandle);
+        HideAllWindows();
     }
 
     public static void ShowTaskHistory()
     {
         UIMonoHelper.Instance.TaskLogParent.SetActive(true);
         EscapeEvents.Add(_taskLogEventHandle);
+        ExtraWindowEvents.Add(_taskLogEventHandle);
         if (Player.instance.TaskManager.PastIsDirty)
         {
             GameObject newTaskPanel;
@@ -197,6 +199,7 @@ public static class Ui
     {
         UIMonoHelper.Instance.TaskLogParent.SetActive(false);
         if (EscapeEvents.Contains(_taskLogEventHandle)) EscapeEvents.Remove(_taskLogEventHandle);
+        if (ExtraWindowEvents.Contains(_taskLogEventHandle)) ExtraWindowEvents.Remove(_taskLogEventHandle);
     }
 
     private static void UpdateCurrenTask()
@@ -254,5 +257,14 @@ public static class Ui
     public static void EquipItem(int slot)
     {
         Player.instance.inventory.EquipItem(slot);
+    }
+
+    private static void HideAllWindows()
+    {
+        foreach (EventHandler<EventArgs> window in ExtraWindowEvents)
+        {
+            window.Invoke(null, EventArgs.Empty);
+        }
+        ExtraWindowEvents.Clear();
     }
 }
