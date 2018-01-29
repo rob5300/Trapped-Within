@@ -86,8 +86,7 @@ public static class Ui
 
                 newSlot.SetActive(true);
                 _inventorySlots.Add(newSlot);
-                //Remove the object to save memory, its no longer needed.
-                Object.Destroy(newSlot.GetComponent<UIFilledSlot>());
+                //Note to self, do not destroy the UIFilledSlot component, as it is needed to forward the selected items to the crafting system.
             }
             //Slot is empty
             else

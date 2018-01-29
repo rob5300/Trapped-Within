@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Entity
 {
-    public class Key : MonoBehaviour, IInteractable
+    public class Key : MoveableEntity, IInteractable
     {
         public string KeyId;
         [SerializeField]

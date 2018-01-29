@@ -52,10 +52,7 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         //Entity Moving
-        if (Input.GetMouseButtonDown(1))
-        {
-            MoveEntity();
-        }
+        MoveEntity(Input.GetMouseButton(1));
     }
 
     public void FixedUpdate()
@@ -101,21 +98,29 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    void MoveEntity()
+    void MoveEntity(bool shouldMove)
     {
-        if (MoveEntitiys)
+        if (shouldMove)
         {
-            itemInteractRay = new Ray(player.camera.transform.position, player.camera.transform.forward);
-            if (Physics.Raycast(itemInteractRay, out itemInteractHit, 5f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
+            if (MoveEntitiys && !_grabbedEntity)
             {
-                MoveableEntity grabbedEntity =
-                    itemInteractHit.transform.GetComponent<MoveableEntity>() ??
-                    itemInteractHit.transform.GetComponentInParent<MoveableEntity>();
-                if (grabbedEntity != null)
+                itemInteractRay = new Ray(player.camera.transform.position, player.camera.transform.forward);
+                if (Physics.Raycast(itemInteractRay, out itemInteractHit, 5f, Physics.DefaultRaycastLayers,
+                    QueryTriggerInteraction.Collide))
                 {
-                    _offset = player.camera.transform.InverseTransformPoint(grabbedEntity.transform.position);
+                    _grabbedEntity =
+                        itemInteractHit.transform.GetComponent<MoveableEntity>() ??
+                        itemInteractHit.transform.GetComponentInParent<MoveableEntity>();
+                    if (_grabbedEntity != null)
+                    {
+                        _offset = player.camera.transform.InverseTransformPoint(_grabbedEntity.transform.position);
+                    }
                 }
             }
+        }
+        else
+        {
+            _grabbedEntity = null;
         }
     }
 }

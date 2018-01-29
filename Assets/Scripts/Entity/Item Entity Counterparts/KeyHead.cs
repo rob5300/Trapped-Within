@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Entity
 {
-    public class KeyHead : MonoBehaviour, IInteractable
+    public class KeyHead : MoveableEntity, IInteractable
     {
         public bool Interactable {
             get { return _interactable; }
