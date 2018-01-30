@@ -20,6 +20,7 @@ namespace Items
         public string Name;
         public GameObject EntityGameObject;
         public bool Equipable = true;
+        public bool CanDrop = false;
 
         public Item()
         {

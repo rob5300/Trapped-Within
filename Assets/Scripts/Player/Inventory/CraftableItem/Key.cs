@@ -41,5 +41,10 @@ namespace Items
         {
             if(successful) player.inventory.RemoveItem(this);
         }
+
+        public override void AssignData(Entity.Entity key)
+        {
+            ((Entity.Key)key).KeyId = KeyId;
+        }
     }
 }

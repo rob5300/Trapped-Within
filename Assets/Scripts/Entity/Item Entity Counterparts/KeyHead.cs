@@ -20,8 +20,7 @@ namespace Entity
 
         public void OnInteract(Player player)
         {
-            player.inventory.AddItem(new Items.KeyHead(CraftedKeyId));
-            Destroy(gameObject);
+            player.inventory.AddItem(new Items.KeyHead(CraftedKeyId), gameObject);
         }
     }
 }

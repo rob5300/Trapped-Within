@@ -7,6 +7,7 @@ namespace Items
 {
     public class CraftableItem : Item
     {
+
         private static Dictionary<List<Type>, Type> CraftableItemsMap = new Dictionary<List<Type>, Type>();
 
         static CraftableItem()
@@ -56,6 +57,15 @@ namespace Items
         public virtual void OnItemCrafted(List<CraftingComponent> craftingComponents)
         {
             
+        }
+
+        /// <summary>
+        /// Assign the Items information to the Entity component. This is due to a MonoBehaviours constructor not being public.
+        /// </summary>
+        /// <param name="entity">Entity to apply the data to.</param>
+        public virtual void AssignData(Entity.Entity entity)
+        {
+
         }
 
         public CraftableItem()

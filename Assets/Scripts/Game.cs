@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// For central game data and tasks.
+/// </summary>
 public static class Game {
 
     public static Task InitialTask = new Task("How did i get here?", "Find a way to escape the room.");

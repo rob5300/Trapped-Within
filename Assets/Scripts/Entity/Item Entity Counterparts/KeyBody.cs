@@ -18,8 +18,7 @@ namespace Entity
         
         public void OnInteract(Player player)
         {
-            player.inventory.AddItem(new Items.KeyBody());
-            Destroy(gameObject);
+            player.inventory.AddItem(new Items.KeyBody(), gameObject);
         }
     }
 }

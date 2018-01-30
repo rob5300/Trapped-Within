@@ -14,8 +14,7 @@ namespace Entity
 
         public override void OnInteract(Player player)
         {
-            player.inventory.AddItem(new Items.Lightbulb());
-            Destroy(gameObject);
+            player.inventory.AddItem(new Items.Lightbulb(), gameObject);
         }
     }
 }

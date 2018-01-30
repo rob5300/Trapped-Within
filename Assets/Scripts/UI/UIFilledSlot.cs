@@ -20,4 +20,9 @@ public class UIFilledSlot : MonoBehaviour
         Ui.EquipItem(Slot);
         EquipButton.interactable = false;
     }
+
+    public void DropItem()
+    {
+        
+    }
 }

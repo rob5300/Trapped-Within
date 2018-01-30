@@ -61,6 +61,7 @@ namespace Items
 
                         }
                         player.HeldObject = _itemslots[slot].Item.EntityGameObject;
+                        player.HeldObject.SetActive(true);
                     }
                 }
 #if UNITY_EDITOR
@@ -78,7 +79,7 @@ namespace Items
         public void UnequipItem()
         {
             EquippedItem = null;
-            UnityEngine.Object.Destroy(player.HeldObject);
+            Object.Destroy(player.HeldObject);
             player.HeldObject = null;
         }
 
@@ -109,6 +110,11 @@ namespace Items
 
         public void AddItem(Item item, bool autoequip = true)
         {
+            AddItem(item, null, autoequip);
+        }
+
+        public void AddItem(Item item, GameObject sourceGameObject, bool autoequip = true)
+        {
             if (item != null) IsDirty = true;
             else return;
             foreach (ItemSlot slot in _itemslots)
@@ -116,6 +122,10 @@ namespace Items
                 if (slot.Item == null)
                 {
                     slot.Item = item;
+                    //We set the gameobject to be the one provided instead.
+                    //We then disable it.
+                    slot.Item.EntityGameObject = sourceGameObject;
+                    sourceGameObject.SetActive(false);
                     if (EquippedItem == null && autoequip && item.Equipable)
                     {
                         EquipItem(slot.Number);
@@ -153,6 +163,27 @@ namespace Items
                 Debug.LogError("Item " + item.Name + " cant be removed from the inventory as it was not in the inventory.");
 #endif
             }
+        }
+
+        public void DropItem(Item item, Vector3 position)
+        {
+            //Assign the data from the new item to its entity
+            //((CraftableItem)crafted).AssignData(((CraftableItem)crafted).EntityGameObject.GetComponent<Entity.Entity>());
+            if (!item.EntityGameObject) return;
+            if (!item.EntityGameObject.scene.isLoaded)
+            {
+                //This is an unloaded gameobject, that is in resources, instantiate it first.
+                item.EntityGameObject = Object.Instantiate(item.EntityGameObject);
+                //Assign the data from the item to its new gameobject if this is a craftable item.
+                if (item is CraftableItem)
+                {
+                    ((CraftableItem)item).AssignData(item.EntityGameObject.GetComponent<Entity.Entity>());
+                }
+            }
+            //Move the objects position.
+            item.EntityGameObject.transform.position = position;
+            item.EntityGameObject.SetActive(true);
+            RemoveItem(item);
         }
 
         public ItemSlot[] GetPopulatedItemSlots()
@@ -202,6 +233,7 @@ namespace Items
                 IsDirty = true;
                 if (crafted is CraftableItem)
                 {
+                    //Tell the item that it was crafted and pass the used items.
                     ((CraftableItem)crafted).OnItemCrafted(componentItems);
                 }
 #if UNITY_EDITOR
