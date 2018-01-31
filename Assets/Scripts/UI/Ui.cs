@@ -80,6 +80,7 @@ public static class Ui
                 GameObject newSlot = Object.Instantiate(UIMonoHelper.Instance.FilledItemSlot, UIMonoHelper.Instance.ItemHolder);
                 newSlot.GetComponent<UIFilledSlot>().Slot = slot.Number;
                 newSlot.GetComponent<UIFilledSlot>().Name.text = slot.Item.Name;
+                newSlot.GetComponent<UIFilledSlot>().DropButton.interactable = slot.Item.CanDrop;
 
                 if (slot.Number == Player.instance.inventory.EquippedItem)
                     newSlot.GetComponent<UIFilledSlot>().EquipButton.interactable = false;
@@ -149,10 +150,14 @@ public static class Ui
         _selectedSlots = new List<int>();
         foreach (GameObject uislot in _inventorySlots)
         {
-            UIFilledSlot fslot = uislot.GetComponent<UIFilledSlot>();
-            if (fslot != null)
+            //Check for null incase an item was dropped and the slot was destroyed
+            if (uislot)
             {
-                fslot.SelectToggle.isOn = false;
+                UIFilledSlot fslot = uislot.GetComponent<UIFilledSlot>();
+                if (fslot != null)
+                {
+                    fslot.SelectToggle.isOn = false;
+                } 
             }
         }
         UIMonoHelper.Instance.CraftButton.interactable = false;

@@ -11,6 +11,7 @@ namespace Items
         public int Capacity { get; private set; }
         public bool IsDirty;
         public int? EquippedItem;
+        private int EquippedItemsLayer = 0;
         public Player player;
 
         private List<ItemSlot> _itemslots;
@@ -46,7 +47,6 @@ namespace Items
                         if (rb)
                         {
                             rb.isKinematic = true;
-
                         }
                         player.HeldObject = newob;
                     }
@@ -58,11 +58,13 @@ namespace Items
                         if (rb)
                         {
                             rb.isKinematic = true;
-
                         }
                         player.HeldObject = _itemslots[slot].Item.EntityGameObject;
                         player.HeldObject.SetActive(true);
                     }
+                    //Change the items layer to prevent it from being raycast
+                    EquippedItemsLayer = _itemslots[slot].Item.EntityGameObject.layer;
+                    _itemslots[slot].Item.EntityGameObject.layer = 2;
                 }
 #if UNITY_EDITOR
                 else if (_itemslots[slot].Item.Equipable && _itemslots[slot].Item.EntityGameObject == null)
@@ -79,7 +81,10 @@ namespace Items
         public void UnequipItem()
         {
             EquippedItem = null;
-            Object.Destroy(player.HeldObject);
+            player.HeldObject.transform.parent = null;
+            player.HeldObject.SetActive(false);
+            player.HeldObject.layer = EquippedItemsLayer;
+            EquippedItemsLayer = 0;
             player.HeldObject = null;
         }
 
@@ -165,11 +170,16 @@ namespace Items
             }
         }
 
+        public void DropItem(int slot, Vector3 position)
+        {
+            DropItem(GetItem(slot), position);
+        }
+
         public void DropItem(Item item, Vector3 position)
         {
             //Assign the data from the new item to its entity
             //((CraftableItem)crafted).AssignData(((CraftableItem)crafted).EntityGameObject.GetComponent<Entity.Entity>());
-            if (!item.EntityGameObject) return;
+            if (!item.EntityGameObject && item.CanDrop) return;
             if (!item.EntityGameObject.scene.isLoaded)
             {
                 //This is an unloaded gameobject, that is in resources, instantiate it first.
@@ -180,10 +190,14 @@ namespace Items
                     ((CraftableItem)item).AssignData(item.EntityGameObject.GetComponent<Entity.Entity>());
                 }
             }
-            //Move the objects position.
+            //Move the objects position. Remove its old parent.
+            item.EntityGameObject.transform.parent = null;
             item.EntityGameObject.transform.position = position;
-            item.EntityGameObject.SetActive(true);
+            item.EntityGameObject.GetComponent<Rigidbody>().isKinematic = false;
+            //Remove it from the inventory.
             RemoveItem(item);
+            //Enable it last, as if the item was equipped it may have been de activated.
+            item.EntityGameObject.SetActive(true);
         }
 
         public ItemSlot[] GetPopulatedItemSlots()

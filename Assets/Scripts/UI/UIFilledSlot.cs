@@ -9,6 +9,7 @@ public class UIFilledSlot : MonoBehaviour
     public Toggle SelectToggle;
     public int Slot;
     public Button EquipButton;
+    public Button DropButton;
 
     public void OnToggle(bool toggleVal)
     {
@@ -23,6 +24,8 @@ public class UIFilledSlot : MonoBehaviour
 
     public void DropItem()
     {
-        
+        //Drop this slots item, then destroy the slot as the item was dropped.
+        Player.instance.inventory.DropItem(Slot, Player.instance.GetDropPosition());
+        Destroy(gameObject);
     }
 }

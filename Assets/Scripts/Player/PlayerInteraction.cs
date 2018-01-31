@@ -35,8 +35,7 @@ public class PlayerInteraction : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            //TODO: drop items.
-            Debug.Log("Drop item not working");
+            DropHeldItem();
         }
         if (Input.GetMouseButtonDown(0))
         {
@@ -121,6 +120,14 @@ public class PlayerInteraction : MonoBehaviour
         else
         {
             _grabbedEntity = null;
+        }
+    }
+
+    void DropHeldItem()
+    {
+        if (player.inventory.EquippedItem != null)
+        {
+            player.inventory.DropItem(player.inventory.GetEquippedItem(), player.GetDropPosition());
         }
     }
 }

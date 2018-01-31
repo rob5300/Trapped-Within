@@ -14,6 +14,7 @@ namespace Items
         {
             Name = "Key";
             EntityGameObject = Resources.Load<GameObject>("CraftableItems/Key");
+            CanDrop = true;
         }
 
         public Key(string name) : this()
