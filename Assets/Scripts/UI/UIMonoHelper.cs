@@ -57,4 +57,9 @@ public class UIMonoHelper : MonoBehaviour
     {
         Ui.HidePauseMenu();
     }
+
+    public void ToMainMenu()
+    {
+        Ui.ToMainMenu();
+    }
 }

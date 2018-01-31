@@ -53,7 +53,10 @@ namespace Entity
 
         public void OnInteract(Player player)
         {
-
+            if (InteractOpensDoor)
+            {
+                ToggleState();
+            }
         }
     } 
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Items;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 public static class Ui
@@ -270,5 +271,12 @@ public static class Ui
             window.Invoke(null, EventArgs.Empty);
         }
         ExtraWindowEvents.Clear();
+    }
+
+    public static void ToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+        //Reset time back to 1.
+        Time.timeScale = 1;
     }
 }

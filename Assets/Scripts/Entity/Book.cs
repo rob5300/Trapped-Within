@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace Entity
 {
-    public class Book : Entity, IInteractable
+    public class Book : MoveableEntity, IInteractable
     {
 
         public string ID = "Book";

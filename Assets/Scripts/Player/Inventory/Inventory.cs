@@ -129,8 +129,11 @@ namespace Items
                     slot.Item = item;
                     //We set the gameobject to be the one provided instead.
                     //We then disable it.
-                    slot.Item.EntityGameObject = sourceGameObject;
-                    sourceGameObject.SetActive(false);
+                    if (sourceGameObject)
+                    {
+                        slot.Item.EntityGameObject = sourceGameObject;
+                        sourceGameObject.SetActive(false);
+                    }
                     if (EquippedItem == null && autoequip && item.Equipable)
                     {
                         EquipItem(slot.Number);
