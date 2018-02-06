@@ -105,7 +105,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 itemInteractRay = new Ray(player.camera.transform.position, player.camera.transform.forward);
                 if (Physics.Raycast(itemInteractRay, out itemInteractHit, 5f, Physics.DefaultRaycastLayers,
-                    QueryTriggerInteraction.Collide))
+                    QueryTriggerInteraction.Ignore))
                 {
                     _grabbedEntity =
                         itemInteractHit.transform.GetComponent<MoveableEntity>() ??
