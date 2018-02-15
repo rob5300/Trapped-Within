@@ -10,6 +10,9 @@ public class UIMonoHelper : MonoBehaviour
 
     public GameObject InventoryParent;
 
+    public GameObject GrabIcon;
+    public GameObject BagIcon;
+
     public GameObject TaskLogParent;
     public Text CurrentTaskName;
     public Text CurrentTaskText;
