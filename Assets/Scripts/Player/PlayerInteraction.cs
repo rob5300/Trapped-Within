@@ -17,6 +17,8 @@ public class PlayerInteraction : MonoBehaviour
     private RaycastHit itemInteractHit;
 
     private MoveableEntity _grabbedEntity;
+    private RigidbodyInterpolation oldEntityMode;
+    private Rigidbody entityRB;
     private Vector3 _newMovePoint;
     private Vector3 _offset;
     private float _velocityClamp = 10;
@@ -61,7 +63,7 @@ public class PlayerInteraction : MonoBehaviour
             _newMovePoint = player.camera.transform.TransformPoint(_offset);
             _newVelocity = (_newMovePoint - _grabbedEntity.transform.position) * VelocityRatio;
             _newVelocity = new Vector3(Mathf.Clamp(_newVelocity.x, -_velocityClamp, _velocityClamp), Mathf.Clamp(_newVelocity.y, -_velocityClamp, _velocityClamp), Mathf.Clamp(_newVelocity.z, -_velocityClamp, _velocityClamp));
-            _grabbedEntity.GetComponent<Rigidbody>().velocity = _newVelocity;
+            entityRB.velocity = _newVelocity;
         }
     }
 
@@ -113,6 +115,9 @@ public class PlayerInteraction : MonoBehaviour
                     if (_grabbedEntity != null)
                     {
                         _offset = player.camera.transform.InverseTransformPoint(_grabbedEntity.transform.position);
+                        entityRB = _grabbedEntity.GetComponent<Rigidbody>();
+                        oldEntityMode = entityRB.interpolation;
+                        entityRB.interpolation = RigidbodyInterpolation.Extrapolate;
                     }
                 }
             }
@@ -120,6 +125,8 @@ public class PlayerInteraction : MonoBehaviour
         else
         {
             _grabbedEntity = null;
+            entityRB.interpolation = oldEntityMode;
+            entityRB = null;
         }
     }
 
