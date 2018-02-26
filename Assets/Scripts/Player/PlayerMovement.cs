@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 _desiredMove;
     private RaycastHit hitInfo;
 
-
     void Start () {
         _charController = GetComponent<CharacterController>();
         player = GetComponent<Player>();

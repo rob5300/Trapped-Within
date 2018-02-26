@@ -279,4 +279,9 @@ public static class Ui
         //Reset time back to 1.
         Time.timeScale = 1;
     }
+
+    public static void SetMoveableEntityVisibility(bool visibility)
+    {
+        UIMonoHelper.Instance.GrabIcon.SetActive(visibility);
+    }
 }

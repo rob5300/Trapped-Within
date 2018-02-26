@@ -1,28 +1,35 @@
-﻿using Entity;
+﻿using cakeslice;
+using Entity;
 using Items;
 using UnityEngine;
 
 [RequireComponent(typeof(Player))]
 public class PlayerInteraction : MonoBehaviour
 {
-
     public bool InteractEvent = true;
     public bool MoveEntitiys = true;
     public float VelocityRatio;
+    public float ReachDistance = 5;
+    public float OutlineDelay = 1.2f;
 
     private Player player;
-    private Ray interactRay;
-    private Ray itemInteractRay;
+    private Ray interactionRay;
     private RaycastHit interactHit;
     private RaycastHit itemInteractHit;
 
     private MoveableEntity _grabbedEntity;
-    private RigidbodyInterpolation oldEntityMode;
-    private Rigidbody entityRB;
+    private RigidbodyInterpolation _oldEntityMode;
+    private float _oldEntityAngularDrag;
+    private Rigidbody _entityRB;
     private Vector3 _newMovePoint;
     private Vector3 _offset;
     private float _velocityClamp = 10;
     private Vector3 _newVelocity;
+    private float _timeOnObject;
+    private GameObject _lookAtObject;
+    private bool _lookatActive = false;
+
+    private Vector3 lastPosition;
 
     public void Start()
     {
@@ -30,6 +37,114 @@ public class PlayerInteraction : MonoBehaviour
     }
 
     public void Update()
+    {
+        InputChecks();
+        LookAtCheck();
+    }
+
+    public void FixedUpdate()
+    {
+        //Update the position of the grabbed entity
+        if (_grabbedEntity != null)
+        {
+            lastPosition = transform.position;
+
+            _newMovePoint = player.camera.transform.TransformPoint(_offset);
+            _newVelocity = (_newMovePoint - _grabbedEntity.transform.position) * VelocityRatio;
+            _newVelocity = new Vector3(Mathf.Clamp(_newVelocity.x, -_velocityClamp, _velocityClamp), Mathf.Clamp(_newVelocity.y, -_velocityClamp, _velocityClamp), Mathf.Clamp(_newVelocity.z, -_velocityClamp, _velocityClamp));
+            _entityRB.velocity = _newVelocity + (transform.position - lastPosition);
+            //Add in our own position movement to compensate.
+        }
+    }
+
+    public void LookAtCheck()
+    {
+        interactionRay = new Ray(player.camera.transform.position, player.camera.transform.forward);
+        if (Physics.Raycast(interactionRay, out interactHit, ReachDistance))
+        {
+            MoveableEntity ment =
+                interactHit.transform.GetComponent<MoveableEntity>() ??
+                interactHit.transform.GetComponentInParent<MoveableEntity>();
+            IInteractable obHit =
+                interactHit.transform.GetComponent<IInteractable>() ??
+                interactHit.transform.GetComponentInParent<IInteractable>();
+            if (ment != null)
+            {
+                //If this a moveable entity.
+                Ui.SetMoveableEntityVisibility(true);
+                if (_lookAtObject == ment.gameObject)
+                {
+                    _timeOnObject += Time.deltaTime;
+                }
+                else
+                {
+                    _timeOnObject = 0;
+                    _lookatActive = false;
+                    _lookAtObject = ment.gameObject;
+                    Outline outL = _lookAtObject.GetComponent<Outline>();
+                    if (outL)
+                    {
+                        Destroy(outL);
+                    }
+                }
+            }
+            else if (obHit != null)
+            {
+                //If this is interactable
+                if (_lookAtObject == ((MonoBehaviour) obHit).gameObject)
+                {
+                    _timeOnObject += Time.deltaTime;
+                }
+                else
+                {
+                    _timeOnObject = 0;
+                    _lookatActive = false;
+                    _lookAtObject = ((MonoBehaviour) obHit).gameObject;
+                    Outline outL = _lookAtObject.GetComponent<Outline>();
+                    if (outL)
+                    {
+                        Destroy(outL);
+                    }
+                }
+            }
+
+            //Is another object type, remove the effect.
+            if (_lookAtObject != null && ment == null && obHit == null)
+            {
+                Outline outL = _lookAtObject.GetComponent<Outline>();
+                if (outL)
+                {
+                    Destroy(outL);
+                }
+                _lookAtObject = null;
+                _lookatActive = false;
+                Ui.SetMoveableEntityVisibility(false);
+            }
+        }
+        else
+        {
+            //Raycast hit nothing, reset and remove.
+            _lookatActive = false;
+            _timeOnObject = 0;
+            if (_lookAtObject)
+            {
+                Outline outL = _lookAtObject.GetComponent<Outline>();
+                if (outL)
+                {
+                    Destroy(outL);
+                } 
+            }
+        }
+
+        //Timer has been met, add outline.
+        if (_timeOnObject > OutlineDelay && !_lookatActive)
+        {
+            _lookAtObject.AddComponent<Outline>();
+            _lookatActive = true;
+        }
+    }
+
+    public void InputChecks()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -41,7 +156,7 @@ public class PlayerInteraction : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
         {
-            if(player.inventory.EquippedItem != null) ItemInteract(player.inventory.GetEquippedItem());
+            if (player.inventory.EquippedItem != null) ItemInteract(player.inventory.GetEquippedItem());
         }
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -56,21 +171,10 @@ public class PlayerInteraction : MonoBehaviour
         MoveEntity(Input.GetMouseButton(1));
     }
 
-    public void FixedUpdate()
-    {
-        if (_grabbedEntity != null)
-        {
-            _newMovePoint = player.camera.transform.TransformPoint(_offset);
-            _newVelocity = (_newMovePoint - _grabbedEntity.transform.position) * VelocityRatio;
-            _newVelocity = new Vector3(Mathf.Clamp(_newVelocity.x, -_velocityClamp, _velocityClamp), Mathf.Clamp(_newVelocity.y, -_velocityClamp, _velocityClamp), Mathf.Clamp(_newVelocity.z, -_velocityClamp, _velocityClamp));
-            entityRB.velocity = _newVelocity;
-        }
-    }
-
     void Interact()
     {
-        interactRay = new Ray(player.camera.transform.position, player.camera.transform.forward);
-        if (Physics.Raycast(interactRay, out interactHit, 5f))
+        interactionRay = new Ray(player.camera.transform.position, player.camera.transform.forward);
+        if (Physics.Raycast(interactionRay, out interactHit, ReachDistance))
         {
             IInteractable obHit =
                 interactHit.transform.GetComponent<IInteractable>() ??
@@ -84,8 +188,8 @@ public class PlayerInteraction : MonoBehaviour
 
     void ItemInteract(Items.Item item)
     {
-        itemInteractRay = new Ray(player.camera.transform.position, player.camera.transform.forward);
-        if (Physics.Raycast(itemInteractRay, out itemInteractHit, 5f, Physics.DefaultRaycastLayers , QueryTriggerInteraction.Collide))
+        interactionRay = new Ray(player.camera.transform.position, player.camera.transform.forward);
+        if (Physics.Raycast(interactionRay, out itemInteractHit, ReachDistance, Physics.DefaultRaycastLayers , QueryTriggerInteraction.Collide))
         {
             IItemInteract obHit =
                 itemInteractHit.transform.GetComponent<IItemInteract>() ??
@@ -105,8 +209,8 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (MoveEntitiys && !_grabbedEntity)
             {
-                itemInteractRay = new Ray(player.camera.transform.position, player.camera.transform.forward);
-                if (Physics.Raycast(itemInteractRay, out itemInteractHit, 5f, Physics.DefaultRaycastLayers,
+                interactionRay = new Ray(player.camera.transform.position, player.camera.transform.forward);
+                if (Physics.Raycast(interactionRay, out itemInteractHit, 5f, Physics.DefaultRaycastLayers,
                     QueryTriggerInteraction.Ignore))
                 {
                     _grabbedEntity =
@@ -115,9 +219,11 @@ public class PlayerInteraction : MonoBehaviour
                     if (_grabbedEntity != null)
                     {
                         _offset = player.camera.transform.InverseTransformPoint(_grabbedEntity.transform.position);
-                        entityRB = _grabbedEntity.GetComponent<Rigidbody>();
-                        oldEntityMode = entityRB.interpolation;
-                        entityRB.interpolation = RigidbodyInterpolation.Extrapolate;
+                        _entityRB = _grabbedEntity.GetComponent<Rigidbody>();
+                        _oldEntityMode = _entityRB.interpolation;
+                        _entityRB.interpolation = RigidbodyInterpolation.Extrapolate;
+                        _oldEntityAngularDrag = _entityRB.angularDrag;
+                        _entityRB.angularDrag = 2;
                     }
                 }
             }
@@ -125,8 +231,12 @@ public class PlayerInteraction : MonoBehaviour
         else
         {
             _grabbedEntity = null;
-            entityRB.interpolation = oldEntityMode;
-            entityRB = null;
+            if (_entityRB)
+            {
+                _entityRB.interpolation = _oldEntityMode;
+                _entityRB.angularDrag = _oldEntityAngularDrag;
+                _entityRB = null; 
+            }
         }
     }
 
