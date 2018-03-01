@@ -80,12 +80,18 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     _timeOnObject = 0;
                     _lookatActive = false;
-                    _lookAtObject = ment.gameObject;
-                    Outline outL = _lookAtObject.GetComponent<Outline>();
-                    if (outL)
+
+                    //If we already have an object, we remove its outline component.
+                    if (_lookAtObject)
                     {
-                        Destroy(outL);
+                        Outline outL = _lookAtObject.GetComponent<Outline>();
+                        if (outL)
+                        {
+                            Destroy(outL);
+                        } 
                     }
+                    //We assign the new object after.
+                    _lookAtObject = ment.gameObject;
                 }
             }
             else if (obHit != null)
@@ -99,12 +105,18 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     _timeOnObject = 0;
                     _lookatActive = false;
-                    _lookAtObject = ((MonoBehaviour) obHit).gameObject;
-                    Outline outL = _lookAtObject.GetComponent<Outline>();
-                    if (outL)
+
+                    //If we already have an object, we remove its outline component.
+                    if (_lookAtObject)
                     {
-                        Destroy(outL);
+                        Outline outL = _lookAtObject.GetComponent<Outline>();
+                        if (outL)
+                        {
+                            Destroy(outL);
+                        }
                     }
+                    //We assign the new object after.
+                    _lookAtObject = ((MonoBehaviour) obHit).gameObject;
                 }
             }
 
@@ -116,9 +128,17 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     Destroy(outL);
                 }
+                _timeOnObject = 0;
                 _lookAtObject = null;
                 _lookatActive = false;
                 Ui.SetMoveableEntityVisibility(false);
+            }
+
+            //Timer has been met, add outline.
+            if (_timeOnObject > OutlineDelay && !_lookatActive)
+            {
+                _lookAtObject.AddComponent<Outline>();
+                _lookatActive = true;
             }
         }
         else
@@ -132,15 +152,12 @@ public class PlayerInteraction : MonoBehaviour
                 if (outL)
                 {
                     Destroy(outL);
-                } 
+                }
+                _timeOnObject = 0;
+                _lookAtObject = null;
+                _lookatActive = false;
+                Ui.SetMoveableEntityVisibility(false);
             }
-        }
-
-        //Timer has been met, add outline.
-        if (_timeOnObject > OutlineDelay && !_lookatActive)
-        {
-            _lookAtObject.AddComponent<Outline>();
-            _lookatActive = true;
         }
     }
 
