@@ -7,15 +7,25 @@ using UnityEngine.Events;
 public class ItemPlaceZone : MonoBehaviour
 {
     public string TypeName;
-    public ItemPlaceEvent OnItemEnter;
-    public bool DoSnap = false;
+    public ItemPlaceZoneEvent OnItemEnter;
+    public ItemPlaceZoneEvent OnItemRemove;
+    public MoveableEntity entity;
+    private bool DoSnap = true;
     public Transform SnapPosition;
+    public bool AllowItemRemoval = true;
+
+    private Collider triggerCollider;
+
+    public void Start()
+    {
+        triggerCollider = GetComponent<Collider>() ?? GetComponentInChildren<Collider>();
+    }
 
     public void OnTriggerEnter(Collider col)
     {
         if (TypeName == null) return;
 
-        foreach (Entity.Entity entity in col.GetComponents<Entity.Entity>())
+        foreach (MoveableEntity entity in col.GetComponents<MoveableEntity>())
         {
             if (TypeName.Equals(entity.GetType().Name))
             {
@@ -26,8 +36,9 @@ public class ItemPlaceZone : MonoBehaviour
         }
     }
 
-    private void Snap(Collider col, Entity.Entity entity)
+    private void Snap(Collider col, MoveableEntity ent)
     {
+        entity = ent;
         Rigidbody rBody = col.GetComponent<Rigidbody>();
         if (rBody) rBody.isKinematic = true;
         if (SnapPosition)
@@ -47,11 +58,33 @@ public class ItemPlaceZone : MonoBehaviour
             interactable.Interactable = false;
         }
 
-        //MoveableEntity moveEnt = entity as MoveableEntity;
-        //if (moveEnt != null)
-        //{
-        //    
-        //}
+        if (!AllowItemRemoval)
+        {
+            entity.Movable = false;
+        }
+        else
+        {
+            entity.SnapZone = this;
+        }
+        DoSnap = false;
+        triggerCollider.enabled = false;
+        OnItemEnter.Invoke(this, entity);
+    }
+
+    public void Unsnap()
+    {
+        entity.GetComponent<Rigidbody>().isKinematic = true;
+        IInteractable interactable = entity as IInteractable;
+        if (interactable != null)
+        {
+            interactable.Interactable = true;
+        }
+
+        triggerCollider.enabled = true;
+        entity.SnapZone = null;
+        entity = null;
+        OnItemRemove.Invoke(this, entity);
+        DoSnap = true;
     }
 
     public void Reset()
@@ -61,7 +94,7 @@ public class ItemPlaceZone : MonoBehaviour
 }
 
 [Serializable]
-public class ItemPlaceEvent : UnityEvent<ItemPlaceZone>
+public class ItemPlaceZoneEvent : UnityEvent<ItemPlaceZone, MoveableEntity>
 {
 
 }
