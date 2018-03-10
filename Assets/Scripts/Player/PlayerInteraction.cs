@@ -53,8 +53,7 @@ public class PlayerInteraction : MonoBehaviour
                 _newMovePoint = player.camera.transform.TransformPoint(_offset);
                 _newVelocity = (_newMovePoint - _grabbedEntity.transform.position) * VelocityRatio;
                 _newVelocity = new Vector3(Mathf.Clamp(_newVelocity.x, -_velocityClamp, _velocityClamp), Mathf.Clamp(_newVelocity.y, -_velocityClamp, _velocityClamp), Mathf.Clamp(_newVelocity.z, -_velocityClamp, _velocityClamp));
-                _entityRB.velocity = _newVelocity + (transform.position - lastPosition);
-                //Add in our own position movement to compensate maybe?
+                _entityRB.velocity = _newVelocity;
             }
             else
             {
@@ -247,14 +246,18 @@ public class PlayerInteraction : MonoBehaviour
                         _oldEntityMode = _entityRB.interpolation;
                         _entityRB.interpolation = RigidbodyInterpolation.Extrapolate;
                         _oldEntityAngularDrag = _entityRB.angularDrag;
-                        _entityRB.angularDrag = 2;
+                        _entityRB.angularDrag = 10;
+                        if (_grabbedEntity.SnapZone)
+                        {
+                            _grabbedEntity.OnUnsnap();
+                        }
                     }
                 }
             }
         }
         else
         {
-            _grabbedEntity = null;
+            if(_grabbedEntity) _grabbedEntity = null;
             if (_entityRB)
             {
                 _entityRB.interpolation = _oldEntityMode;

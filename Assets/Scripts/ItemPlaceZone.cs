@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class ItemPlaceZone : MonoBehaviour
 {
     public string TypeName;
+    public string PlaceZoneID;
     public ItemPlaceZoneEvent OnItemEnter;
     public ItemPlaceZoneEvent OnItemRemove;
     public MoveableEntity entity;
@@ -15,6 +16,7 @@ public class ItemPlaceZone : MonoBehaviour
     public bool AllowItemRemoval = true;
 
     private Collider triggerCollider;
+    private MoveableEntity _ignoredEntity;
 
     public void Start()
     {
@@ -23,17 +25,37 @@ public class ItemPlaceZone : MonoBehaviour
 
     public void OnTriggerEnter(Collider col)
     {
-        if (TypeName == null) return;
-
-        foreach (MoveableEntity entity in col.GetComponents<MoveableEntity>())
+        if (!string.IsNullOrEmpty(TypeName))
         {
-            if (TypeName.Equals(entity.GetType().Name))
+            foreach (MoveableEntity entity in col.GetComponents<MoveableEntity>())
             {
-                //Success, this object has the type we want.
-                if(DoSnap) Snap(col, entity);
-                break;
+                if (TypeName.Equals(entity.GetType().Name))
+                {
+                    //Success, this object has the type we want.
+                    if (DoSnap && entity != _ignoredEntity) Snap(col, entity);
+                    break;
+                }
             }
         }
+        else if (PlaceZoneID != null)
+        {
+            ItemPlaceZoneID id = col.GetComponent<ItemPlaceZoneID>();
+            if (id && id.ID == PlaceZoneID)
+            {
+                //This matches the id. Get the moveable entity and use that for snapping.
+                MoveableEntity ent = col.GetComponent<MoveableEntity>();
+                if (ent)
+                {
+                    if (DoSnap && ent != _ignoredEntity) Snap(col, ent);
+                }
+            }
+        }
+        
+    }
+
+    public void OnTriggerExit(Collider col)
+    {
+        if (col.GetComponent<MoveableEntity>() == _ignoredEntity) _ignoredEntity = null;
     }
 
     private void Snap(Collider col, MoveableEntity ent)
@@ -73,7 +95,7 @@ public class ItemPlaceZone : MonoBehaviour
 
     public void Unsnap()
     {
-        entity.GetComponent<Rigidbody>().isKinematic = true;
+        entity.GetComponent<Rigidbody>().isKinematic = false;
         IInteractable interactable = entity as IInteractable;
         if (interactable != null)
         {
@@ -81,6 +103,7 @@ public class ItemPlaceZone : MonoBehaviour
         }
 
         triggerCollider.enabled = true;
+        _ignoredEntity = entity;
         entity.SnapZone = null;
         entity = null;
         OnItemRemove.Invoke(this, entity);

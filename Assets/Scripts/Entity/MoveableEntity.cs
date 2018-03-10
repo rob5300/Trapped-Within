@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Entity
 {
@@ -6,6 +7,7 @@ namespace Entity
     public class MoveableEntity : Entity
     {
         public bool Movable = true;
+        [NonSerialized]
         public ItemPlaceZone SnapZone;
 
         public virtual void OnUnsnap()

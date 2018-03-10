@@ -34,7 +34,11 @@ public class Box : Entity.Entity, IItemInteract, IInteractable {
 
     public void OnInteract(Player player)
     {
-        throw new System.NotImplementedException();
+        if (!IsLocked)
+        {
+            if (IsOpen) Close();
+            else Open();
+        }
     }
 
     protected void Unlock()
