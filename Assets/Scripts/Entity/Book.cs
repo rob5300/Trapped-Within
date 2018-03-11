@@ -36,10 +36,6 @@ namespace Entity
                 OnActivation.Invoke();
                 Activated = true;
             }
-
-#if UNITY_EDITOR
-            Debug.Log("Book \"" + ID + "\" activated!");
-#endif
         }
     } 
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Entity
 {
-    public class Item : Entity, IInteractable
+    public class Item : MoveableEntity, IInteractable
     {
         public bool Interactable
         {

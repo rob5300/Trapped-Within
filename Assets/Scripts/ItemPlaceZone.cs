@@ -1,10 +1,11 @@
 ﻿using System;
 using Entity;
+using Items;
 using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
-public class ItemPlaceZone : MonoBehaviour
+public class ItemPlaceZone : MonoBehaviour, IItemInteract
 {
     public string TypeName;
     public string PlaceZoneID;
@@ -16,6 +17,7 @@ public class ItemPlaceZone : MonoBehaviour
     public bool AllowItemRemoval = true;
 
     private Collider triggerCollider;
+    [NonSerialized]
     private MoveableEntity _ignoredEntity;
 
     public void Start()
@@ -25,32 +27,36 @@ public class ItemPlaceZone : MonoBehaviour
 
     public void OnTriggerEnter(Collider col)
     {
+        CheckIfValid(col.gameObject);
+    }
+
+    private void CheckIfValid(GameObject gObject)
+    {
         if (!string.IsNullOrEmpty(TypeName))
         {
-            foreach (MoveableEntity entity in col.GetComponents<MoveableEntity>())
+            foreach (MoveableEntity ent in gObject.GetComponents<MoveableEntity>())
             {
-                if (TypeName.Equals(entity.GetType().Name))
+                if (TypeName.Equals(ent.GetType().Name))
                 {
                     //Success, this object has the type we want.
-                    if (DoSnap && entity != _ignoredEntity) Snap(col, entity);
+                    if (DoSnap && ent != _ignoredEntity) Snap(gObject, ent);
                     break;
                 }
             }
         }
         else if (PlaceZoneID != null)
         {
-            ItemPlaceZoneID id = col.GetComponent<ItemPlaceZoneID>();
+            ItemPlaceZoneID id = gObject.GetComponent<ItemPlaceZoneID>();
             if (id && id.ID == PlaceZoneID)
             {
                 //This matches the id. Get the moveable entity and use that for snapping.
-                MoveableEntity ent = col.GetComponent<MoveableEntity>();
+                MoveableEntity ent = gObject.GetComponent<MoveableEntity>();
                 if (ent)
                 {
-                    if (DoSnap && ent != _ignoredEntity) Snap(col, ent);
+                    if (DoSnap && ent != _ignoredEntity) Snap(gObject, ent);
                 }
             }
         }
-        
     }
 
     public void OnTriggerExit(Collider col)
@@ -58,10 +64,10 @@ public class ItemPlaceZone : MonoBehaviour
         if (col.GetComponent<MoveableEntity>() == _ignoredEntity) _ignoredEntity = null;
     }
 
-    private void Snap(Collider col, MoveableEntity ent)
+    private void Snap(GameObject gObject, MoveableEntity ent)
     {
         entity = ent;
-        Rigidbody rBody = col.GetComponent<Rigidbody>();
+        Rigidbody rBody = gObject.GetComponent<Rigidbody>();
         if (rBody) rBody.isKinematic = true;
         if (SnapPosition)
         {
@@ -75,14 +81,10 @@ public class ItemPlaceZone : MonoBehaviour
         }
 
         IInteractable interactable = entity as IInteractable;
-        if (interactable != null)
-        {
-            interactable.Interactable = false;
-        }
-
         if (!AllowItemRemoval)
         {
             entity.Movable = false;
+            if (interactable != null) interactable.Interactable = false;
         }
         else
         {
@@ -93,7 +95,7 @@ public class ItemPlaceZone : MonoBehaviour
         OnItemEnter.Invoke(this, entity);
     }
 
-    public void Unsnap()
+    public void Unsnap(bool ignore)
     {
         entity.GetComponent<Rigidbody>().isKinematic = false;
         IInteractable interactable = entity as IInteractable;
@@ -103,7 +105,7 @@ public class ItemPlaceZone : MonoBehaviour
         }
 
         triggerCollider.enabled = true;
-        _ignoredEntity = entity;
+        if (ignore) _ignoredEntity = entity;
         entity.SnapZone = null;
         entity = null;
         OnItemRemove.Invoke(this, entity);
@@ -113,6 +115,42 @@ public class ItemPlaceZone : MonoBehaviour
     public void Reset()
     {
         GetComponent<Collider>().isTrigger = true;
+    }
+
+    public bool OnItemInteract(Items.Item item, Player player)
+    {
+        return CheckIfValidItem(item.EntityGameObject, item, player);
+    }
+
+    private bool CheckIfValidItem(GameObject entityGameObject, Items.Item item, Player player)
+    {
+        if (!string.IsNullOrEmpty(TypeName))
+        {
+            foreach (MoveableEntity ent in entityGameObject.GetComponents<MoveableEntity>())
+            {
+                if (TypeName.Equals(ent.GetType().Name))
+                {
+                    //Success, this object has the type we want.
+                    if (DoSnap && ent != _ignoredEntity) Snap(player.inventory.DropItem(item, Vector3.zero), ent);
+                    return true;
+                }
+            }
+        }
+        else if (PlaceZoneID != null)
+        {
+            ItemPlaceZoneID id = entityGameObject.GetComponent<ItemPlaceZoneID>();
+            if (id && id.ID == PlaceZoneID)
+            {
+                //This matches the id. Get the moveable entity and use that for snapping.
+                MoveableEntity ent = entityGameObject.GetComponent<MoveableEntity>();
+                if (ent)
+                {
+                    if (DoSnap && ent != _ignoredEntity) Snap(player.inventory.DropItem(item, Vector3.zero), ent);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
 

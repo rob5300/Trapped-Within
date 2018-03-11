@@ -169,17 +169,21 @@ public class PlayerInteraction : MonoBehaviour
 
     public void InputChecks()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (!Ui.InventoryVisible && !Ui.PauseMenuVisible)
         {
-            Interact();
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            DropHeldItem();
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (player.inventory.EquippedItem != null) ItemInteract(player.inventory.GetEquippedItem());
+            //Only do these inputs if we dont have a window open.
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Interact();
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                DropHeldItem();
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (player.inventory.EquippedItem != null) ItemInteract(player.inventory.GetEquippedItem());
+            } 
         }
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -204,7 +208,12 @@ public class PlayerInteraction : MonoBehaviour
                 interactHit.transform.GetComponentInParent<IInteractable>();
             if (obHit != null)
             {
-                if (obHit.Interactable) obHit.OnInteract(player);
+                if (obHit.Interactable)
+                {
+                    obHit.OnInteract(player);
+                    MoveableEntity ent = obHit as MoveableEntity;
+                    if(ent && ent.SnapZone != null) ent.OnUnsnap(false);
+                }
             }
         }
     }

@@ -90,7 +90,9 @@ namespace Items
 
         public void EquipedItemUsed(GameObject entity, bool successful)
         {
-            GetEquippedItem().OnItemUse(entity, player, successful);
+            Item eItem = GetEquippedItem();
+            //We check if its actually null, because Snap zones will make the item drop before this can finish. Soo it was not used properly.
+            if(eItem != null) eItem.OnItemUse(entity, player, successful);
         }
 
         public Item GetItem(int slot)
@@ -100,7 +102,11 @@ namespace Items
 
         public Item GetEquippedItem()
         {
-            return (EquippedItem != null) ? GetItem((int)EquippedItem) : null;
+            if (EquippedItem.HasValue)
+            {
+                return GetItem(EquippedItem.Value);
+            }
+            return null;
         }
 
         public ItemSlot GetItemSlot(int slot)
@@ -161,8 +167,11 @@ namespace Items
             {
                 foreach (ItemSlot slot in _itemslots)
                 {
-                    if (slot.Item == item) RemoveItem(slot.Number);
-                    break;
+                    if (slot.Item == item)
+                    {
+                        RemoveItem(slot.Number);
+                        break;
+                    }
                 }
             }
             else
@@ -173,16 +182,16 @@ namespace Items
             }
         }
 
-        public void DropItem(int slot, Vector3 position)
+        public GameObject DropItem(int slot, Vector3 position)
         {
-            DropItem(GetItem(slot), position);
+            return DropItem(GetItem(slot), position);
         }
 
-        public void DropItem(Item item, Vector3 position)
+        public GameObject DropItem(Item item, Vector3 position)
         {
             //Assign the data from the new item to its entity
             //((CraftableItem)crafted).AssignData(((CraftableItem)crafted).EntityGameObject.GetComponent<Entity.Entity>());
-            if (!item.EntityGameObject && item.CanDrop) return;
+            if (!item.EntityGameObject && item.CanDrop) return null;
             if (!item.EntityGameObject.scene.isLoaded)
             {
                 //This is an unloaded gameobject, that is in resources, instantiate it first.
@@ -201,6 +210,7 @@ namespace Items
             RemoveItem(item);
             //Enable it last, as if the item was equipped it may have been de activated.
             item.EntityGameObject.SetActive(true);
+            return item.EntityGameObject;
         }
 
         public ItemSlot[] GetPopulatedItemSlots()

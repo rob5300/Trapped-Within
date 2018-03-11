@@ -10,9 +10,9 @@ namespace Entity
         [NonSerialized]
         public ItemPlaceZone SnapZone;
 
-        public virtual void OnUnsnap()
+        public virtual void OnUnsnap(bool ignore = true)
         {
-            SnapZone.Unsnap();
+            SnapZone.Unsnap(ignore);
         }
     }
 }
