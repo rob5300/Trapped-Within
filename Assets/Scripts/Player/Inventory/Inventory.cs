@@ -119,11 +119,6 @@ namespace Items
             return _itemslots;
         }
 
-        public void AddItem(Item item, bool autoequip = true)
-        {
-            AddItem(item, null, autoequip);
-        }
-
         public void AddItem(Item item, GameObject sourceGameObject, bool autoequip = true)
         {
             if (item != null) IsDirty = true;
@@ -256,7 +251,7 @@ namespace Items
                 }
 
                 //Add the new item to the inventory. This is done after the old materials are removed to ensure the new item takes the lowest slot.
-                AddItem(crafted, false);
+                AddItem(crafted, null, false);
                 IsDirty = true;
                 if (crafted is CraftableItem)
                 {

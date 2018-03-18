@@ -26,6 +26,16 @@ public class UIMonoHelper : MonoBehaviour
     public Transform ItemHolder;
     public Button CraftButton;
 
+    public GameObject NoteParent;
+    public Button NoteNextButton;
+    public Button NotePrevButton;
+    public Text NoteText;
+
+    public GameObject ItemInfoParent;
+    public Text ItemInfoName;
+    public Text ItemInfoDescription;
+    public Button ViewButton;
+
     public UIMonoHelper()
     {
         Instance = this;
@@ -64,5 +74,25 @@ public class UIMonoHelper : MonoBehaviour
     public void ToMainMenu()
     {
         Ui.ToMainMenu();
+    }
+
+    public void NotePrev()
+    {
+        NoteUI.PreviousPage();
+    }
+
+    public void NoteNext()
+    {
+        NoteUI.NextPage();
+    }
+
+    public void NoteView()
+    {
+        NoteUI.ViewNote();
+    }
+
+    public void NoteClose()
+    {
+        NoteUI.HideNote(this, EventArgs.Empty);
     }
 }

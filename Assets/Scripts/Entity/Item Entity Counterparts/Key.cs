@@ -27,7 +27,7 @@ namespace Entity
 
         public void OnInteract(Player player)
         {
-            player.inventory.AddItem(new Items.Key("Key", KeyId), gameObject);
+            player.inventory.AddItem(new Items.Key(Name, KeyId), gameObject);
         }
     }
 }

@@ -28,4 +28,9 @@ public class UIFilledSlot : MonoBehaviour
         Player.instance.inventory.DropItem(Slot, Player.instance.GetDropPosition());
         Destroy(gameObject);
     }
+
+    public void OnSlotClick()
+    {
+        Ui.ItemSlotClicked(Slot);
+    }
 }

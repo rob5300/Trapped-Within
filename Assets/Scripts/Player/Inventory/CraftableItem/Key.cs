@@ -9,10 +9,10 @@ namespace Items
         /// The id of this key.
         /// </summary>
         public string KeyId = "default";
+        public new string Name = "Key";
 
         public Key()
         {
-            Name = "Key";
             EntityGameObject = Resources.Load<GameObject>("CraftableItems/Key");
             CanDrop = true;
         }
@@ -24,7 +24,7 @@ namespace Items
 
         public Key(string name, string keyId) : this(name)
         {
-            KeyId = KeyId.ToLower();
+            KeyId = keyId.ToLower();
         }
 
         public override void OnItemCrafted(List<CraftingComponent> craftingComponents)

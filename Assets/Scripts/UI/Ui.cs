@@ -18,6 +18,9 @@ public static class Ui
     public static List<EventHandler<EventArgs>> EscapeEvents = new List<EventHandler<EventArgs>>();
     public static List<EventHandler<EventArgs>> ExtraWindowEvents = new List<EventHandler<EventArgs>>();
 
+    public static int? CurrentItemSlot;
+    public static Item CurrentItem;
+
     //EventHandlers for EscapeEvents
     private static readonly EventHandler<EventArgs> _inventoryEventHandle = HideInventory;
     private static readonly EventHandler<EventArgs> _taskLogEventHandle = HideTaskHistory;
@@ -83,7 +86,7 @@ public static class Ui
                 newSlot.GetComponent<UIFilledSlot>().Name.text = slot.Item.Name;
                 newSlot.GetComponent<UIFilledSlot>().DropButton.interactable = slot.Item.CanDrop;
 
-                if (slot.Number == Player.instance.inventory.EquippedItem)
+                if (slot.Number == Player.instance.inventory.EquippedItem || !slot.Item.Equipable)
                     newSlot.GetComponent<UIFilledSlot>().EquipButton.interactable = false;
 
                 newSlot.SetActive(true);
@@ -284,4 +287,22 @@ public static class Ui
     {
         UIMonoHelper.Instance.GrabIcon.SetActive(visibility);
     }
+
+    public static void ItemSlotClicked(int slot)
+    {
+        CurrentItemSlot = slot;
+        CurrentItem = Player.instance.inventory.GetItem(slot);
+        //Set item information and reveal item info.
+        UpdateAndShowItemInfo();
+    }
+
+    public static void UpdateAndShowItemInfo()
+    {
+        UIMonoHelper.Instance.ItemInfoName.text = CurrentItem.Name;
+        UIMonoHelper.Instance.ItemInfoDescription.text = CurrentItem.Description;
+        UIMonoHelper.Instance.ViewButton.interactable = CurrentItem is Note;
+        UIMonoHelper.Instance.ItemInfoParent.SetActive(true);
+    }
+
+
 }

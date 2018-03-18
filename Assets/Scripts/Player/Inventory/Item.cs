@@ -18,6 +18,7 @@ namespace Items
         }
 
         public string Name;
+        public string Description;
         public GameObject EntityGameObject;
         public bool Equipable = true;
         public bool CanDrop = false;

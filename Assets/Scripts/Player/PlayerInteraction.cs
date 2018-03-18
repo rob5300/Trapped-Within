@@ -29,8 +29,6 @@ public class PlayerInteraction : MonoBehaviour
     private GameObject _lookAtObject;
     private bool _lookatActive = false;
 
-    private Vector3 lastPosition;
-
     public void Start()
     {
         player = GetComponent<Player>();
@@ -49,7 +47,6 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (_grabbedEntity.Movable)
             {
-                lastPosition = transform.position;
                 _newMovePoint = player.camera.transform.TransformPoint(_offset);
                 _newVelocity = (_newMovePoint - _grabbedEntity.transform.position) * VelocityRatio;
                 _newVelocity = new Vector3(Mathf.Clamp(_newVelocity.x, -_velocityClamp, _velocityClamp), Mathf.Clamp(_newVelocity.y, -_velocityClamp, _velocityClamp), Mathf.Clamp(_newVelocity.z, -_velocityClamp, _velocityClamp));

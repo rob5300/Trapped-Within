@@ -5,7 +5,6 @@ namespace Items
 {
     public class Lightbulb : Item
     {
-
         public Lightbulb()
         {
             //Name = "Light bulb";
