@@ -51,7 +51,7 @@ namespace Entity
             return Open;
         }
 
-        public void OnInteract(Player player)
+        public virtual void OnInteract(Player player)
         {
             if (InteractOpensDoor)
             {

@@ -34,7 +34,6 @@ public static class NoteUI
         CurrentNoteContents = null;
         UIMonoHelper.Instance.NoteParent.SetActive(false);
         if(Ui.EscapeEvents.Contains(_noteviewEventHandle)) Ui.EscapeEvents.Remove(_noteviewEventHandle);
-        if (Ui.ExtraWindowEvents.Contains(_noteviewEventHandle)) Ui.ExtraWindowEvents.Remove(_noteviewEventHandle);
     }
 
     public static void NextPage()

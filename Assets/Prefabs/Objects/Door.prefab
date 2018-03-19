@@ -114,8 +114,8 @@ Transform:
   m_GameObject: {fileID: 1558632162568780}
   m_LocalRotation: {x: 0.00000010331604, y: -0.000000075497894, z: 0.000000043711392,
     w: 1}
-  m_LocalPosition: {x: 0.008369718, y: 0.010542026, z: -0.00019442366}
-  m_LocalScale: {x: -0.1124591, y: 0.10040639, z: 0.10040639}
+  m_LocalPosition: {x: -0.8421, y: -0.0191, z: 1.0582}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4840283505150042}
   m_RootOrder: 0
@@ -126,14 +126,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864520038335874}
-  m_LocalRotation: {x: 0.000000029802322, y: -0.00000052154064, z: -0, w: -1}
+  m_LocalRotation: {x: -0.0000018246462, y: 0.70710784, z: 0.70710576, w: 0.0000021986698}
   m_LocalPosition: {x: 0.008591984, y: -0.9344975, z: -0.02067014}
-  m_LocalScale: {x: 99.99996, y: 99.99998, z: 100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4615196649444368}
   m_Father: {fileID: 4178267812638110}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 180.00002}
 --- !u!23 &23035808149436264
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -204,14 +204,14 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864520038335874}
-  m_Mesh: {fileID: 4300000, guid: 286f23b336c6179449d009f37b076721, type: 3}
+  m_Mesh: {fileID: 4300000, guid: d456aaa596246474db4e83a440bbb10c, type: 3}
 --- !u!33 &33714800155020502
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1558632162568780}
-  m_Mesh: {fileID: 4300002, guid: 286f23b336c6179449d009f37b076721, type: 3}
+  m_Mesh: {fileID: 4300002, guid: d456aaa596246474db4e83a440bbb10c, type: 3}
 --- !u!65 &65985632109975664
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -253,7 +253,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Door
+  Description: 
   Open: 0
   InteractOpensDoor: 0
   interactable: 1
-  KeyId: 01
+  KeyId: 99

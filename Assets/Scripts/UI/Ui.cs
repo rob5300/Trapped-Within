@@ -207,7 +207,6 @@ public static class Ui
     {
         UIMonoHelper.Instance.TaskLogParent.SetActive(false);
         if (EscapeEvents.Contains(_taskLogEventHandle)) EscapeEvents.Remove(_taskLogEventHandle);
-        if (ExtraWindowEvents.Contains(_taskLogEventHandle)) ExtraWindowEvents.Remove(_taskLogEventHandle);
     }
 
     private static void UpdateCurrenTask()

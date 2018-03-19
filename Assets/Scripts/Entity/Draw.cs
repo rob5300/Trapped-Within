@@ -20,19 +20,29 @@ namespace Entity
         }
         [SerializeField]
         private bool _interactable = true;
-        public bool Open = false;
+        public bool IsOpen = false;
 
         public void OnInteract(Player player)
         {
-            Open = !Open;
-            if (Open)
+            IsOpen = !IsOpen;
+            if (IsOpen)
             {
-                GetComponent<Animator>().SetTrigger("Open");
+                Open();
             }
             else
             {
-                GetComponent<Animator>().SetTrigger("Close");
+                Close();
             }
+        }
+
+        public void Open()
+        {
+            GetComponent<Animator>().SetTrigger("Open");
+        }
+
+        public void Close()
+        {
+            GetComponent<Animator>().SetTrigger("Close");
         }
     }
 }
