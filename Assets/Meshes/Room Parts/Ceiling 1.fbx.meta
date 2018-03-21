@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 27d30d99513570b479678358167026bd
-timeCreated: 1521488937
+guid: 6dcf9d77c7bd9b74890f91706c5765b3
+timeCreated: 1521655988
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Floor Tile
+    4300000: Ceiling
   materials:
     importMaterials: 1
     materialName: 0
@@ -45,7 +45,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0

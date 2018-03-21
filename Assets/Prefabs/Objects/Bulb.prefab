@@ -26,23 +26,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!1 &1359396690630380
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4103045197517444}
-  - component: {fileID: 108170267020320956}
-  m_Layer: 0
-  m_Name: Point Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1935490595012096
 GameObject:
@@ -62,7 +46,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4090241330054702
 Transform:
@@ -71,24 +55,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1935490595012096}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4629993, y: 0.19780016, z: -0.5098199}
+  m_LocalPosition: {x: -16.972, y: 1.206, z: 7.23}
   m_LocalScale: {x: 0.07950003, y: 0.079500094, z: 0.079500094}
   m_Children:
   - {fileID: 4725000665097546}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4103045197517444
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1359396690630380}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.291}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4725000665097546}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4725000665097546
@@ -100,8 +71,7 @@ Transform:
   m_LocalRotation: {x: 1, y: -0, z: 0, w: 0.00000013315805}
   m_LocalPosition: {x: -0.00016010641, y: 0.0040393663, z: -0.69955397}
   m_LocalScale: {x: 6.666668, y: 6.666668, z: 6.6666675}
-  m_Children:
-  - {fileID: 4103045197517444}
+  m_Children: []
   m_Father: {fileID: 4090241330054702}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -120,7 +90,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: ec3348dd13742b14890ca18572008403, type: 2}
   - {fileID: 2100000, guid: 8bf332c2f96bd7e4f8edab53d7f00ec7, type: 2}
-  - {fileID: 2100000, guid: d2f11a5f25d79184b951f2f21a1714cd, type: 2}
+  - {fileID: 2100000, guid: f74eed5cab6389640813ee8089f03430, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -152,7 +122,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: d2f11a5f25d79184b951f2f21a1714cd, type: 2}
+  - {fileID: 2100000, guid: f74eed5cab6389640813ee8089f03430, type: 2}
   - {fileID: 2100000, guid: 2aeddfb3aed08754287841746a8f206e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -201,42 +171,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!108 &108170267020320956
-Light:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1359396690630380}
-  m_Enabled: 0
-  serializedVersion: 8
-  m_Type: 2
-  m_Color: {r: 0.93698543, g: 0.9485294, b: 0.8648356, a: 1}
-  m_Intensity: 0.32
-  m_Range: 5.467798
-  m_SpotAngle: 30
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Lightmapping: 4
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_ShadowRadius: 0.1
-  m_ShadowAngle: 0
 --- !u!114 &114982407117016722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -249,8 +183,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Lightbulb
+  Description: A lightbulb compatible with the fittings in this house.
   Movable: 1
-  _interctable: 1
+  _interactable: 1
 --- !u!136 &136119896049785444
 CapsuleCollider:
   m_ObjectHideFlags: 1

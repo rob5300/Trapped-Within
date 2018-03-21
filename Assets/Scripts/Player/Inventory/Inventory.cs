@@ -65,6 +65,10 @@ namespace Items
                     //Change the items layer to prevent it from being raycast
                     EquippedItemsLayer = _itemslots[slot].Item.EntityGameObject.layer;
                     _itemslots[slot].Item.EntityGameObject.layer = 2;
+
+                    //Show the name of the item on the HUD
+                    UIMonoHelper.Instance.EquippedItemName.text = GetEquippedItem().Name;
+                    UIMonoHelper.Instance.EquippedItemName.enabled = true;
                 }
 #if UNITY_EDITOR
                 else if (_itemslots[slot].Item.Equipable && _itemslots[slot].Item.EntityGameObject == null)
@@ -86,6 +90,8 @@ namespace Items
             player.HeldObject.layer = EquippedItemsLayer;
             EquippedItemsLayer = 0;
             player.HeldObject = null;
+
+            UIMonoHelper.Instance.EquippedItemName.enabled = false;
         }
 
         public void EquipedItemUsed(GameObject entity, bool successful)

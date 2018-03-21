@@ -8,7 +8,10 @@ public class UIMonoHelper : MonoBehaviour
 
     public GameObject PauseParent;
 
+    public GameObject InteractableCrosshair;
+
     public GameObject InventoryParent;
+    public Text EquippedItemName;
 
     public GameObject GrabIcon;
     public GameObject BagIcon;
@@ -49,6 +52,8 @@ public class UIMonoHelper : MonoBehaviour
         CompletedTaskPanel.SetActive(false);
         TaskLogParent.SetActive(false);
         PauseParent.SetActive(false);
+        EquippedItemName.enabled = false;
+        InteractableCrosshair.SetActive(false);
     }
 
     public void Craft()

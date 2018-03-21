@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 113217e27f181be48b285aa281aa275b
-timeCreated: 1521491172
+guid: 42f3ff3818c5b4d468c9f30508b1c1e5
+timeCreated: 1521653371
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Floor Tile.001
+    4300000: Corner Wall Section inner
   materials:
     importMaterials: 1
     materialName: 0
@@ -45,7 +45,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0

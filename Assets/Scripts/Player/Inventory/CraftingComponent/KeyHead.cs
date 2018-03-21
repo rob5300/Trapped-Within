@@ -11,7 +11,8 @@ namespace Items
 
         public KeyHead()
         {
-            Name = "KeyHead";
+            Name = "Key Head";
+            Description = "The head of a key. The rest has broken off.";
             Equipable = false;
         }
 

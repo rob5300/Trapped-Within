@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4840283505150042}
   - component: {fileID: 33124549783930644}
   - component: {fileID: 23035808149436264}
-  - component: {fileID: 65985632109975664}
+  - component: {fileID: 65975435131480228}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -98,14 +98,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1282324066874830}
-  m_LocalRotation: {x: -0.00000004214685, y: -1, z: -0, w: -0.000000104308114}
-  m_LocalPosition: {x: 0.35059, y: 0.8773, z: 0.53976}
+  m_LocalRotation: {x: -0.000000029802322, y: -0.7071069, z: -0.000000029802319, w: 0.7071067}
+  m_LocalPosition: {x: -5.6707, y: 0.9345, z: 2.2361}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4178267812638110}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -179.99998, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
 --- !u!4 &4615196649444368
 Transform:
   m_ObjectHideFlags: 1
@@ -127,7 +127,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864520038335874}
   m_LocalRotation: {x: -0.0000018246462, y: 0.70710784, z: 0.70710576, w: 0.0000021986698}
-  m_LocalPosition: {x: 0.008591984, y: -0.9344975, z: -0.02067014}
+  m_LocalPosition: {x: 0.009, y: -0.934, z: -0.028}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4615196649444368}
@@ -212,7 +212,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1558632162568780}
   m_Mesh: {fileID: 4300002, guid: d456aaa596246474db4e83a440bbb10c, type: 3}
---- !u!65 &65985632109975664
+--- !u!65 &65975435131480228
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -222,8 +222,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.009057293, y: 0.021084048, z: 0.0006030797}
-  m_Center: {x: 0.0045286575, y: 0.010542023, z: -0.00019146159}
+  m_Size: {x: 0.90572953, y: 0.060307916, z: 2.108405}
+  m_Center: {x: -0.45286477, y: -0.019147238, z: 1.0542026}
 --- !u!95 &95000656189106984
 Animator:
   serializedVersion: 3
@@ -257,4 +257,4 @@ MonoBehaviour:
   Open: 0
   InteractOpensDoor: 0
   interactable: 1
-  KeyId: 99
+  KeyId: 0

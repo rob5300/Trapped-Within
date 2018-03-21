@@ -9,7 +9,8 @@ namespace Items
     {
         public KeyBody()
         {
-            Name = "KeyBody";
+            Name = "Key Body";
+            Description = "The body of a key. It's too short to be used in a lock.";
             Equipable = false;
         }
     }

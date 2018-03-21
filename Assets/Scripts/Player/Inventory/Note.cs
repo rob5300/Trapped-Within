@@ -7,12 +7,12 @@ namespace Items
     public class Note : Item
     {
         public string[] Contents;
-        public new bool Equipable = false;
 
         public Note()
         {
             Contents = new []{"(This note is illegible)"};
             Name = "Note";
+            Equipable = false;
         }
 
         public Note(string name, string description, string[] contents)

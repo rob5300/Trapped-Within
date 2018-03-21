@@ -252,7 +252,6 @@ GameObject:
   - component: {fileID: 33028550411457520}
   - component: {fileID: 23318451774013520}
   - component: {fileID: 65644728117873818}
-  - component: {fileID: 54448006827869094}
   m_Layer: 0
   m_Name: default
   m_TagString: Untagged
@@ -288,6 +287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4272518015857646}
   - component: {fileID: 114003000923742068}
+  - component: {fileID: 95018233302576848}
   m_Layer: 0
   m_Name: Activatable Book
   m_TagString: Untagged
@@ -492,6 +492,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4260973163666346}
+  - component: {fileID: 95747852931933970}
   m_Layer: 0
   m_Name: Bookcase w books
   m_TagString: Untagged
@@ -705,8 +706,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1836395360942884}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.12, y: 0, z: 3.484}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.2398987, y: -0.89436996, z: 11.390541}
   m_LocalScale: {x: 1, y: 1, z: 0.46751097}
   m_Children:
   - {fileID: 4567904935840604}
@@ -1817,21 +1818,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!54 &54448006827869094
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1465755985317926}
-  serializedVersion: 2
-  m_Mass: 2
-  m_Drag: 0.2
-  m_AngularDrag: 0.2
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!54 &54521224212123416
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -2173,6 +2159,40 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04247616, y: 0.351822, z: 0.24}
   m_Center: {x: 0, y: 0.175911, z: -0.12}
+--- !u!95 &95018233302576848
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1508202535368690}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9e357ccb492ed0d478edc323c33cada4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95747852931933970
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1836395360942884}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9e357ccb492ed0d478edc323c33cada4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114003000923742068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2184,22 +2204,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21fae395d9260e6478bc375490de508f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: Book
+  Name: Book
+  Description: 
   Activated: 0
   interactable: 1
   OnActivation:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OpenDoor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null

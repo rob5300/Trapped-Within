@@ -10,6 +10,7 @@ public class PlayerInteraction : MonoBehaviour
     public bool MoveEntitiys = true;
     public float VelocityRatio;
     public float ReachDistance = 5;
+    public bool DrawOutline = true;
     public float OutlineDelay = 1.2f;
 
     private Player player;
@@ -29,9 +30,10 @@ public class PlayerInteraction : MonoBehaviour
     private GameObject _lookAtObject;
     private bool _lookatActive = false;
 
-    public void Start()
+    public void Awake()
     {
         player = GetComponent<Player>();
+        player.camera.GetComponent<OutlineEffect>().enabled = DrawOutline;
     }
 
     public void Update()
@@ -65,17 +67,21 @@ public class PlayerInteraction : MonoBehaviour
         interactionRay = new Ray(player.camera.transform.position, player.camera.transform.forward);
         if (Physics.Raycast(interactionRay, out interactHit, ReachDistance))
         {
-            MoveableEntity ment =
+            MoveableEntity moveableEntity =
                 interactHit.transform.GetComponent<MoveableEntity>() ??
                 interactHit.transform.GetComponentInParent<MoveableEntity>();
-            IInteractable obHit =
+            IInteractable interactable =
                 interactHit.transform.GetComponent<IInteractable>() ??
                 interactHit.transform.GetComponentInParent<IInteractable>();
-            if (ment != null)
+            IItemInteract itemInteract =
+                interactHit.transform.GetComponent<IItemInteract>() ??
+                interactHit.transform.GetComponentInParent<IItemInteract>();
+            if (moveableEntity != null)
             {
                 //If this a moveable entity.
                 Ui.SetMoveableEntityVisibility(true);
-                if (_lookAtObject == ment.gameObject)
+
+                if (_lookAtObject == moveableEntity.gameObject && DrawOutline)
                 {
                     _timeOnObject += Time.deltaTime;
                 }
@@ -94,13 +100,13 @@ public class PlayerInteraction : MonoBehaviour
                         } 
                     }
                     //We assign the new object after.
-                    _lookAtObject = ment.gameObject;
+                    _lookAtObject = moveableEntity.gameObject;
                 }
             }
-            else if (obHit != null)
+            else if (interactable != null)
             {
                 //If this is interactable
-                if (_lookAtObject == ((MonoBehaviour) obHit).gameObject)
+                if (_lookAtObject == ((MonoBehaviour) interactable).gameObject && DrawOutline)
                 {
                     _timeOnObject += Time.deltaTime;
                 }
@@ -119,14 +125,18 @@ public class PlayerInteraction : MonoBehaviour
                         }
                     }
                     //We assign the new object after.
-                    _lookAtObject = ((MonoBehaviour) obHit).gameObject;
+                    _lookAtObject = ((MonoBehaviour) interactable).gameObject;
                 }
             }
+            
+            //This object is item interactable. Enable crosshair only if we have an item equipped.
+            UIMonoHelper.Instance.InteractableCrosshair.SetActive(((interactable != null && interactable.Interactable) || (itemInteract != null && player.inventory.EquippedItem != null)));
 
             //Is another object type, remove the effect.
-            if (_lookAtObject != null && ment == null && obHit == null)
+            if (_lookAtObject != null && moveableEntity == null && interactable == null)
             {
                 Outline outL = _lookAtObject.GetComponent<Outline>();
+                UIMonoHelper.Instance.InteractableCrosshair.SetActive(false);
                 if (outL)
                 {
                     Destroy(outL);
@@ -138,7 +148,7 @@ public class PlayerInteraction : MonoBehaviour
             }
 
             //Timer has been met, add outline.
-            if (_timeOnObject > OutlineDelay && !_lookatActive)
+            if (_timeOnObject > OutlineDelay && !_lookatActive && DrawOutline)
             {
                 _lookAtObject.AddComponent<Outline>();
                 _lookatActive = true;
@@ -149,6 +159,7 @@ public class PlayerInteraction : MonoBehaviour
             //Raycast hit nothing, reset and remove.
             _lookatActive = false;
             _timeOnObject = 0;
+            UIMonoHelper.Instance.InteractableCrosshair.SetActive(false);
             if (_lookAtObject)
             {
                 Outline outL = _lookAtObject.GetComponent<Outline>();
