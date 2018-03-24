@@ -4945,11 +4945,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4476152690699322, guid: 809b303ad5ab96b4482029705adb9c6e,
     type: 2}
   m_PrefabInternal: {fileID: 414564134}
---- !u!4 &439977691 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4037732678538170, guid: 2276d8a6dac7fc14aa6dea2a54890f13,
-    type: 2}
-  m_PrefabInternal: {fileID: 1348069308}
 --- !u!114 &439977692 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114810568459350652, guid: 2276d8a6dac7fc14aa6dea2a54890f13,
@@ -12823,14 +12818,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 24
       objectReference: {fileID: 0}
-    - target: {fileID: 4252644371717932, guid: ce6a09a7c869efb47b1ab7cfe2dc196e, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90.00001
-      objectReference: {fileID: 0}
-    - target: {fileID: 4252644371717932, guid: ce6a09a7c869efb47b1ab7cfe2dc196e, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -270
-      objectReference: {fileID: 0}
     - target: {fileID: 1105826468457374, guid: ce6a09a7c869efb47b1ab7cfe2dc196e, type: 2}
       propertyPath: m_Name
       value: Wall Corner (2)
@@ -16792,6 +16779,11 @@ Prefab:
 --- !u!4 &1348069309 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4957685972334564, guid: 2276d8a6dac7fc14aa6dea2a54890f13,
+    type: 2}
+  m_PrefabInternal: {fileID: 1348069308}
+--- !u!4 &1348069310 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4372073523508282, guid: 2276d8a6dac7fc14aa6dea2a54890f13,
     type: 2}
   m_PrefabInternal: {fileID: 1348069308}
 --- !u!1001 &1351325649
@@ -25110,7 +25102,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 439977691}
+    m_TransformParent: {fileID: 1348069310}
     m_Modifications:
     - target: {fileID: 4546114708062102, guid: d81267e5cfb2ec4458d7f8dc79babc7c, type: 2}
       propertyPath: m_LocalPosition.x
@@ -25142,7 +25134,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4546114708062102, guid: d81267e5cfb2ec4458d7f8dc79babc7c, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114930455939869032, guid: d81267e5cfb2ec4458d7f8dc79babc7c,
         type: 2}
