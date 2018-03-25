@@ -16,37 +16,35 @@ public class PlayerMovement : MonoBehaviour {
 
     private float _yRotation = 0f;
     private float _xRotation = 0f;
-    private float _rotationSensitivityFrame;
 
     private float _horizontal = 0f;
     private float _vertical = 0f;
     private Vector3 _desiredMove;
     private RaycastHit hitInfo;
 
-    void Start () {
+    public void Start () {
         _charController = GetComponent<CharacterController>();
         player = GetComponent<Player>();
         LockCursor();
     }
 	
-	void Update () {
+	public void Update () {
         if (DoRotation) Rotation();
         if (DoMovement) Movement();
 	}
 
     private void Rotation()
     {
-        _rotationSensitivityFrame = RotateSensitivity * Time.deltaTime;
-
         #region Camera Rotation
         //For Up Down rotation.
-        _xRotation += Input.GetAxis("Mouse Y") * _rotationSensitivityFrame;
-        player.camera.transform.localRotation = Quaternion.Euler(-Mathf.Clamp(_xRotation, -90, 90), 0f, 0f); 
+        _xRotation += Input.GetAxis("Mouse Y") * RotateSensitivity;
+        _xRotation = Mathf.Clamp(_xRotation, -90, 90);
+        player.camera.transform.localRotation = Quaternion.Euler(-_xRotation, 0f, 0f); 
         #endregion
 
         #region Player Rotation
         //For Left Right rotation.
-        _yRotation = Input.GetAxis("Mouse X") * _rotationSensitivityFrame;
+        _yRotation = Input.GetAxis("Mouse X") * RotateSensitivity;
         transform.rotation *= Quaternion.Euler(0f, _yRotation, 0f);
         #endregion
     }

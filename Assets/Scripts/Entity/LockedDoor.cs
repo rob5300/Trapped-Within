@@ -28,6 +28,8 @@ public class LockedDoor : Door, IItemInteract
             if (key.KeyId == KeyId || KeyId == "")
             {
                 OpenDoor();
+                //Now allow the door to be opened and closed without the key.
+                InteractOpensDoor = true;
                 return true;
             }
         }
