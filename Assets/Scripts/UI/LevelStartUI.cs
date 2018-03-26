@@ -34,6 +34,7 @@ public class LevelStartUI : MonoBehaviour
             }
             if (lerpVal >= 1)
             {
+                Ui.LevelStartUiInvoke();
                 Destroy(gameObject);
             }
         }

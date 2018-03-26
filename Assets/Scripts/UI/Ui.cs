@@ -10,6 +10,8 @@ public static class Ui
     public static bool InventoryVisible = false;
     public static bool PauseMenuVisible = false;
 
+    public static event Action LevelStartUIDismissed;
+
     private static List<GameObject> _inventorySlots = new List<GameObject>();
     private static List<int> _selectedSlots = new List<int>();
     private static List<GameObject> _pastTaskPanels = new List<GameObject>();
@@ -303,5 +305,8 @@ public static class Ui
         UIMonoHelper.Instance.ItemInfoParent.SetActive(true);
     }
 
-
+    public static void LevelStartUiInvoke()
+    {
+        if(LevelStartUIDismissed != null) LevelStartUIDismissed.Invoke();
+    }
 }
