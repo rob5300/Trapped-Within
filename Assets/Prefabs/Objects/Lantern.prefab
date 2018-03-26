@@ -55,6 +55,8 @@ GameObject:
   - component: {fileID: 4323411560701324}
   - component: {fileID: 33958104268597798}
   - component: {fileID: 23249218541515448}
+  - component: {fileID: 65091268652980184}
+  - component: {fileID: 136079910452535730}
   m_Layer: 0
   m_Name: Lantern
   m_TagString: Untagged
@@ -86,7 +88,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1691353684018856}
   m_LocalRotation: {x: -0.6296371, y: -0.32180306, z: -0.32180306, w: 0.629637}
-  m_LocalPosition: {x: -23.259, y: 1.358, z: 14.661}
+  m_LocalPosition: {x: 0.59950066, y: -0.110304, z: -1.0170012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4990220147319084}
@@ -128,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1084367698357356}
   m_LocalRotation: {x: 0.00000008940697, y: 0.000000044703484, z: 0.045466647, w: 0.99896586}
-  m_LocalPosition: {x: 0.022, y: -0.007, z: 0.224}
+  m_LocalPosition: {x: -0.002, y: 0.001, z: 0.233}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4323411560701324}
@@ -253,6 +255,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1691353684018856}
   m_Mesh: {fileID: 4300000, guid: b7db45667d34b524ba98c16dec986308, type: 3}
+--- !u!65 &65091268652980184
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1691353684018856}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.30407673, y: 0.31247726, z: 0.13883322}
+  m_Center: {x: -0.000000014734832, y: 0.002655454, z: 0.06941651}
 --- !u!108 &108324379863182436
 Light:
   m_ObjectHideFlags: 1
@@ -300,3 +314,16 @@ Halo:
     serializedVersion: 2
     rgba: 4281328110
   m_Size: 0.04
+--- !u!136 &136079910452535730
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1691353684018856}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.17
+  m_Height: 0.78
+  m_Direction: 2
+  m_Center: {x: -0.000000015619946, y: -0.0000000045059068, z: 0.38466635}

@@ -13,7 +13,7 @@ namespace Entity
             set { _interactable = value; }
         }
 
-        [SerializeField] private bool _interactable;
+        [SerializeField] private bool _interactable = true;
 
         public void OnInteract(Player player)
         {

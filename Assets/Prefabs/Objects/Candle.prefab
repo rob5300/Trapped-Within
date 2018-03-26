@@ -292,9 +292,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Flame: {fileID: 108006464232273424}
+  FlameParticle: {fileID: 198913376472861020}
   MaxIntensity: 2.5
   MinIntensity: 1.5
   ChangeDelay: 0.1
+  IsOn: 1
 --- !u!135 &135712915586759000
 SphereCollider:
   m_ObjectHideFlags: 1

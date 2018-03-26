@@ -20,6 +20,7 @@ namespace Items
             Name = name;
             Description = description;
             Contents = contents;
+            Equipable = false;
         }
     }
 }

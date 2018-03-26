@@ -197,7 +197,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             Ui.ToggleInventory();
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyUp(KeyCode.Escape))
         {
             Ui.Escape();
         }
@@ -250,7 +250,7 @@ public class PlayerInteraction : MonoBehaviour
             if (MoveEntitiys && !_grabbedEntity)
             {
                 interactionRay = new Ray(player.camera.transform.position, player.camera.transform.forward);
-                if (Physics.Raycast(interactionRay, out itemInteractHit, 5f, Physics.DefaultRaycastLayers,
+                if (Physics.Raycast(interactionRay, out itemInteractHit, ReachDistance, Physics.DefaultRaycastLayers,
                     QueryTriggerInteraction.Ignore))
                 {
                     _grabbedEntity =

@@ -27,6 +27,8 @@ public class Box : Entity.Entity, IItemInteract, IInteractable {
             if (k.KeyId == KeyId)
             {
                 if (IsLocked) Unlock();
+                Open();
+                return true;
             }
         }
         return false;

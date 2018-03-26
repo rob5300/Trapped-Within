@@ -17,19 +17,31 @@ namespace Entity
         public GameObject HiddenObject;
         public bool PulledUp = false;
 
-        private Collider col;
+        public Collider CollisionCollider;
+        private Collider hiddenObCollider;
         private Animator anim;
 
         public void Start()
         {
             if(HiddenObject.activeSelf) HiddenObject.SetActive(false);
-            col = GetComponent<Collider>();
             anim = GetComponent<Animator>();
             //Ignore collisions between the rug and its hidden object.
-            Collider hiddenObCollider =
+            hiddenObCollider =
                 HiddenObject.GetComponent<Collider>();
             if(!hiddenObCollider) hiddenObCollider = HiddenObject.GetComponentInChildren<Collider>();
-            Physics.IgnoreCollision(col, hiddenObCollider);
+            Physics.IgnoreCollision(CollisionCollider, hiddenObCollider);
+        }
+
+        public void OnTriggerExit(Collider col)
+        {
+            if (PulledUp && col.gameObject == HiddenObject)
+            {
+                Physics.IgnoreCollision(CollisionCollider, hiddenObCollider, false);
+            }
+            else if(col.gameObject.transform.parent.gameObject == HiddenObject)
+            {
+                Physics.IgnoreCollision(CollisionCollider, hiddenObCollider, false);
+            }
         }
 
         public void OnInteract(Player player)

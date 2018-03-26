@@ -39,6 +39,8 @@ public class UIMonoHelper : MonoBehaviour
     public Text ItemInfoDescription;
     public Button ViewButton;
 
+    public Text HintText;
+
     public UIMonoHelper()
     {
         Instance = this;
