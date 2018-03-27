@@ -84,7 +84,7 @@ namespace Entity
 
         private void DisablePortal()
         {
-            occlusionPortal.open = false;
+            if(!Open) occlusionPortal.open = false;
         }
     } 
 }
