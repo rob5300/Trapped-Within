@@ -1,6 +1,4 @@
-﻿using NUnit.Framework;
-
-namespace Entity
+﻿namespace Entity
 {
     public class PlacePuzzleObject : MoveableEntity
     {
