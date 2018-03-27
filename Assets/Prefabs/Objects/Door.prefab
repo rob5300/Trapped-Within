@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4606793823725840}
   - component: {fileID: 95000656189106984}
-  - component: {fileID: 114085121907956750}
+  - component: {fileID: 114852464350506722}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 33124549783930644}
   - component: {fileID: 23035808149436264}
   - component: {fileID: 65975435131480228}
+  - component: {fileID: 41501448122317408}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -213,6 +214,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1558632162568780}
   m_Mesh: {fileID: 4300002, guid: 1a6de954cbd491646b1d307046708958, type: 3}
+--- !u!41 &41501448122317408
+OcclusionPortal:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1864520038335874}
+  m_Open: 0
+  m_Center: {x: -0.4276498, y: -0.018312596, z: 1.0621647}
+  m_Size: {x: 0.87858045, y: 0.10871406, z: 2.0824368}
 --- !u!65 &65975435131480228
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -242,7 +252,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114085121907956750
+--- !u!114 &114852464350506722
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -250,12 +260,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1282324066874830}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58bfa0a1e8bd59a4baf9b2b2f08ffd3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0bb94e37a7e3c7343a9b368d661bf2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Locked Door
+  Name: 
   Description: 
   Open: 0
-  InteractOpensDoor: 0
+  InteractOpensDoor: 1
+  occlusionPortal: {fileID: 41501448122317408}
   interactable: 1
-  KeyId: 0

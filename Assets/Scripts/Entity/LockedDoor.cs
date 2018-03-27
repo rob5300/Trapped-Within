@@ -7,17 +7,21 @@ using UnityEngine;
 public class LockedDoor : Door, IItemInteract
 {
     public string KeyId = "";
-
-    private Animator animator;
-
-    public new void Start()
-    {
-        animator = GetComponent<Animator>();
-    }
+    public bool Locked = true;
 
     public override void OnInteract(Player player)
     {
-        if(!Open) animator.SetTrigger("DoorLocked");
+        if (Locked) animator.SetTrigger("DoorLocked");
+        else if (InteractOpensDoor)
+        {
+            ToggleState();
+        }
+    }
+
+    public void UnlockAndOpen()
+    {
+        Locked = false;
+        OpenDoor();
     }
 
     public bool OnItemInteract(Items.Item item, Player player)
@@ -30,6 +34,8 @@ public class LockedDoor : Door, IItemInteract
                 OpenDoor();
                 //Now allow the door to be opened and closed without the key.
                 InteractOpensDoor = true;
+                Interactable = true;
+                Locked = false;
                 return true;
             }
         }

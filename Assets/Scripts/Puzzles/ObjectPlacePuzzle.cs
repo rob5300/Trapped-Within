@@ -12,7 +12,16 @@ public class ObjectPlacePuzzle : MonoBehaviour
     public Box WinBox;
     public bool Won = false;
 
-    private int _zonesCorrect = 0;
+    private bool[] _correctZones;
+
+    public void Awake()
+    {
+        _correctZones = new bool[PlaceZones.Length];
+        //for(int i=0;i<PlaceZones.Length; i++)
+        //{
+        //    _correctZones[i] = false;
+        //}
+    }
 
     public void Start()
     {
@@ -30,7 +39,7 @@ public class ObjectPlacePuzzle : MonoBehaviour
         if (puzzleObject && zoneId != null && zoneId.Value == puzzleObject.ID)
         {
             //This is in the correct position.
-            _zonesCorrect++;
+            _correctZones[zoneId.Value] = true;
             Candles[zoneId.Value].TurnOn();
         }
         WinCheck();
@@ -42,7 +51,7 @@ public class ObjectPlacePuzzle : MonoBehaviour
         int? zoneId = GetZoneId(zone);
         if (zoneId != null)
         {
-            _zonesCorrect--;
+            _correctZones[zoneId.Value] = false;
             Candles[zoneId.Value].TurnOff();
         }
     }
@@ -58,11 +67,10 @@ public class ObjectPlacePuzzle : MonoBehaviour
 
     public void WinCheck()
     {
-        if (_zonesCorrect == PlaceZones.Length)
+        if (_correctZones.Count(x => x == true) == PlaceZones.Length)
         {
             Won = true;
             WinBox.Open();
-            WinBox.Interactable = false;
         }
     }
 }

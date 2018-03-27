@@ -52,6 +52,7 @@ namespace Items
                     }
                     else
                     {
+                        //This was an object that was in the scene.
                         _itemslots[slot].Item.EntityGameObject.transform.parent = player.HoldPoint;
                         _itemslots[slot].Item.EntityGameObject.transform.localPosition = Vector3.zero;
                         Rigidbody rb = _itemslots[slot].Item.EntityGameObject.GetComponent<Rigidbody>();

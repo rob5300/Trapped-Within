@@ -10,6 +10,10 @@ namespace Entity
     {
         public bool Open = false;
         public bool InteractOpensDoor = false;
+        public OcclusionPortal occlusionPortal;
+
+        protected DoorCloser closer;
+        protected Animator animator;
 
         public bool Interactable
         {
@@ -26,16 +30,35 @@ namespace Entity
         [SerializeField]
         private bool interactable = false;
 
+        public new void Start()
+        {
+            animator = GetComponent<Animator>();
+
+            if (!occlusionPortal)
+            {
+                occlusionPortal = GetComponentInChildren<OcclusionPortal>();
+            }
+
+            occlusionPortal.open = Open;
+            closer = gameObject.AddComponent<DoorCloser>();
+            closer.door = this;
+            closer.enabled = false;
+        }
+
         public void OpenDoor()
         {
             Open = true;
-            GetComponent<Animator>().SetTrigger("Open");
+            occlusionPortal.open = true;
+            animator.SetTrigger("Open");
+            closer.enabled = true;
         }
 
         public void CloseDoor()
         {
             Open = false;
-            GetComponent<Animator>().SetTrigger("Close");
+            //We need to disable the portal after a delay to ensure that the door is closed visualy before we prevent the gemoetry behind drawing.
+            Invoke("DisablePortal", 1.5f);
+            animator.SetTrigger("Close");
         }
 
         public bool ToggleState()
@@ -57,6 +80,11 @@ namespace Entity
             {
                 ToggleState();
             }
+        }
+
+        private void DisablePortal()
+        {
+            occlusionPortal.open = false;
         }
     } 
 }

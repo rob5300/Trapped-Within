@@ -32,6 +32,7 @@ public class ItemPlaceZone : MonoBehaviour, IItemInteract
 
     private void CheckIfValid(GameObject gObject)
     {
+        //For trigger entry game objects.
         if (!string.IsNullOrEmpty(TypeName))
         {
             foreach (MoveableEntity ent in gObject.GetComponents<MoveableEntity>())
@@ -39,7 +40,11 @@ public class ItemPlaceZone : MonoBehaviour, IItemInteract
                 if (TypeName.Equals(ent.GetType().Name))
                 {
                     //Success, this object has the type we want.
-                    if (DoSnap && ent != _ignoredEntity) Snap(gObject, ent);
+                    if (DoSnap && ent != _ignoredEntity &&
+                        (Player.instance.inventory.EquippedItem != null ? gObject != Player.instance.inventory.GetEquippedItem().EntityGameObject : true))
+                    {
+                        Snap(gObject, ent);
+                    }
                     break;
                 }
             }

@@ -10,6 +10,8 @@ public static class Ui
     public static bool InventoryVisible = false;
     public static bool PauseMenuVisible = false;
 
+    public static bool InventoryAddEmptySlots = false;
+
     public static event Action LevelStartUIDismissed;
 
     private static List<GameObject> _inventorySlots = new List<GameObject>();
@@ -96,7 +98,7 @@ public static class Ui
                 //Note to self, do not destroy the UIFilledSlot component, as it is needed to forward the selected items to the crafting system.
             }
             //Slot is empty
-            else
+            else if(InventoryAddEmptySlots)
             {
                 GameObject newSlot = Object.Instantiate(UIMonoHelper.Instance.EmptyItemSlot, UIMonoHelper.Instance.ItemHolder);
                 newSlot.name = slot.Number.ToString();
@@ -280,6 +282,7 @@ public static class Ui
     public static void ToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+        PauseMenuVisible = false;
         //Reset time back to 1.
         Time.timeScale = 1;
     }

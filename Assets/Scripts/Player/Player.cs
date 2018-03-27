@@ -16,7 +16,7 @@ public class Player : MonoBehaviour {
     public Player()
     {
         instance = this;
-        inventory = new Inventory(8, this);
+        inventory = new Inventory(32, this);
         TaskManager = new TaskManager(Game.InitialTask);
     }
 
