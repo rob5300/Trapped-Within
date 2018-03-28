@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4418344830149476}
   - component: {fileID: 33681997475144360}
   - component: {fileID: 23326070386966924}
-  - component: {fileID: 65624259819423862}
+  - component: {fileID: 65618560521686784}
   m_Layer: 0
   m_Name: Meduim Table
   m_TagString: Untagged
@@ -36,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1252111730180922}
   m_LocalRotation: {x: -0.50000006, y: -0.50000006, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -2.113, y: -0, z: 4.784}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalPosition: {x: 1.2526474, y: -2.192535, z: -2.1968708}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -81,7 +81,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1252111730180922}
   m_Mesh: {fileID: 4300000, guid: 6c352f8913320a040b7d9758ac167c1a, type: 3}
---- !u!65 &65624259819423862
+--- !u!65 &65618560521686784
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -91,5 +91,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.014243635, y: 0.029978257, z: 0.011495042}
-  m_Center: {x: 0.0020828298, y: -9.334502e-10, z: 0.0057475176}
+  m_Size: {x: 1.4243636, y: 2.9978259, z: 1.1495041}
+  m_Center: {x: 0.2082831, y: -0.0000020006937, z: 0.57475173}

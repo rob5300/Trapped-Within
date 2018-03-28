@@ -1,6 +1,7 @@
 ﻿using Items;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class Box : Entity.Entity, IItemInteract, IInteractable {
 
     public bool Interactable { get { return _interactable; } set { _interactable = value; } }
