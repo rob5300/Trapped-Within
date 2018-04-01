@@ -201,7 +201,14 @@ public class PlayerInteraction : MonoBehaviour
         {
             Ui.Escape();
         }
-
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            player.movement.ApplyControllerPreset(player.movement.CrouchedState);
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            player.movement.ApplyControllerPreset(player.movement.NormalState);
+        }
         //Entity Moving
         MoveEntity(Input.GetMouseButton(1));
     }

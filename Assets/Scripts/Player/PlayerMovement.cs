@@ -10,6 +10,12 @@ public class PlayerMovement : MonoBehaviour {
     public bool DoMovement = true;
     public float RotateSensitivity = 5f;
     public float MoveSensitivity = 3f;
+    public CharacterControllerPreset CrouchedState;
+
+    [System.NonSerialized]
+    public CharacterControllerPreset NormalState;
+    [System.NonSerialized]
+    public CharacterControllerPreset CurrentState;
 
     private CharacterController _charController;
     private Player player;
@@ -25,6 +31,9 @@ public class PlayerMovement : MonoBehaviour {
     public void Start () {
         _charController = GetComponent<CharacterController>();
         player = GetComponent<Player>();
+        //We record the normal state of the player to let us go back to this when we uncrouch.
+        NormalState = new CharacterControllerPreset(_charController.height, _charController.center, player.camera.transform.localPosition);
+        CurrentState = NormalState;
         LockCursor();
     }
 	
@@ -61,7 +70,15 @@ public class PlayerMovement : MonoBehaviour {
                            _charController.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
         _desiredMove = Vector3.ProjectOnPlane(_desiredMove, hitInfo.normal).normalized;
 
-        _charController.SimpleMove(_desiredMove * MoveSensitivity);
+        _charController.SimpleMove(_desiredMove * (MoveSensitivity * CurrentState.MoveSpeedModifier));
+    }
+
+    public void ApplyControllerPreset(CharacterControllerPreset preset)
+    {
+        _charController.height = preset.Height;
+        _charController.center = preset.Center;
+        player.camera.transform.localPosition = preset.CameraPositionLocalSpace;
+        CurrentState = preset;
     }
 
     public static void LockCursor()
@@ -74,5 +91,24 @@ public class PlayerMovement : MonoBehaviour {
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+}
+
+[System.Serializable]
+public struct CharacterControllerPreset
+{
+    public float Height;
+    public Vector3 Center;
+    public Vector3 CameraPositionLocalSpace;
+    public float MoveSpeedModifier;
+
+    public CharacterControllerPreset(float height, Vector3 center, Vector3 cameraPositionLocal) : this(height, center, cameraPositionLocal, 1) {}
+
+    public CharacterControllerPreset(float height, Vector3 center, Vector3 cameraPositionLocal, float moveSpeedModifier)
+    {
+        Height = height;
+        Center = center;
+        CameraPositionLocalSpace = cameraPositionLocal;
+        MoveSpeedModifier = moveSpeedModifier;
     }
 }
