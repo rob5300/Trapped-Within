@@ -21,7 +21,11 @@ GameObject:
   - component: {fileID: 4272021056807202}
   - component: {fileID: 33623980083386152}
   - component: {fileID: 23674836567752400}
+  - component: {fileID: 114864564818028424}
   - component: {fileID: 65109445011582814}
+  - component: {fileID: 65828941553035632}
+  - component: {fileID: 65793917859184302}
+  - component: {fileID: 54823850702918792}
   m_Layer: 0
   m_Name: Vent Cover
   m_TagString: Untagged
@@ -81,6 +85,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1675049996603366}
   m_Mesh: {fileID: 4300002, guid: e678140ab96d2a94687fb68f2b3ead93, type: 3}
+--- !u!54 &54823850702918792
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1675049996603366}
+  serializedVersion: 2
+  m_Mass: 10
+  m_Drag: 1
+  m_AngularDrag: 3
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65109445011582814
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -91,5 +110,44 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3427744, y: 0.18732898, z: 0.99879134}
-  m_Center: {x: -0.0000000027914175, y: -0.09366436, z: 0.0058198534}
+  m_Size: {x: 0.05333686, y: 0.18732896, z: 0.4270392}
+  m_Center: {x: 0.64471877, y: -0.09366436, z: -0.000030063093}
+--- !u!65 &65793917859184302
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1675049996603366}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.3427744, y: 0.05991483, z: 0.99879134}
+  m_Center: {x: -8.951363e-16, y: -0.029953467, z: 0.005819857}
+--- !u!65 &65828941553035632
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1675049996603366}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.05333686, y: 0.18732896, z: 0.4270392}
+  m_Center: {x: -0.66, y: -0.09366436, z: -0.000030063093}
+--- !u!114 &114864564818028424
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1675049996603366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f3479ce7af5464992c318afe1eff7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  Description: 
+  Moveable: 0
+  AttachedScrews: 0

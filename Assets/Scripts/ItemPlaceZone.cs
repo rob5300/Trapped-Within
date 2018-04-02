@@ -88,7 +88,7 @@ public class ItemPlaceZone : MonoBehaviour, IItemInteract
         IInteractable interactable = entity as IInteractable;
         if (!AllowItemRemoval)
         {
-            entity.Movable = false;
+            entity.Moveable = false;
             if (interactable != null) interactable.Interactable = false;
         }
         else

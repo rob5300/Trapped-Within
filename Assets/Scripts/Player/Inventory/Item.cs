@@ -25,7 +25,7 @@ namespace Items
 
         public Item()
         {
-            if (Name == null) Name = GetType().Name;
+            if (String.IsNullOrEmpty(Name)) Name = GetType().Name;
         }
 
         public Item(string name)
