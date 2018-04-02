@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4556562607617542}
   - component: {fileID: 33810471716417638}
   - component: {fileID: 23173711581158554}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Window Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4396196275972204}
   - component: {fileID: 33578628087120572}
   - component: {fileID: 23801308546130384}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall Window 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4106709448487274}
   - component: {fileID: 33816293427573546}
   - component: {fileID: 23553054067879496}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Window Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour {
     public CharacterControllerPreset NormalState;
     [System.NonSerialized]
     public CharacterControllerPreset CurrentState;
+    [System.NonSerialized]
+    public bool Crouched = false;
 
     private CharacterController _charController;
     private Player player;
@@ -28,18 +30,31 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 _desiredMove;
     private RaycastHit hitInfo;
 
+    private bool _tryUncroutch;
+    private Ray _croutchCheckRay;
+    private float _croutchCheckDistance;
+
     public void Start () {
         _charController = GetComponent<CharacterController>();
         player = GetComponent<Player>();
         //We record the normal state of the player to let us go back to this when we uncrouch.
         NormalState = new CharacterControllerPreset(_charController.height, _charController.center, player.camera.transform.localPosition);
         CurrentState = NormalState;
+        //We need to do this via a method and not in the constructor as Unity does not call the contrsuctor when it applies its serialised values.
+        CrouchedState.CalculateTopPosition();
+
+        _croutchCheckDistance = Vector3.Distance(CrouchedState.TopPosition, NormalState.TopPosition);
         LockCursor();
     }
 	
 	public void Update () {
         if (DoRotation) Rotation();
         if (DoMovement) Movement();
+
+        if (_tryUncroutch && Crouched)
+        {
+            TryUnCroutch();
+        }
 	}
 
     private void Rotation()
@@ -81,6 +96,35 @@ public class PlayerMovement : MonoBehaviour {
         CurrentState = preset;
     }
 
+    public void Croutch()
+    {
+        Crouched = true;
+        _tryUncroutch = false;
+        ApplyControllerPreset(CrouchedState);
+    }
+
+    public void TryUnCroutch()
+    {
+        if (EnoughCroutchSpace())
+        {
+            ApplyControllerPreset(NormalState);
+            Crouched = false;
+            _tryUncroutch = false;
+        }
+        else
+        {
+            _tryUncroutch = true;
+        }
+    }
+
+    public bool EnoughCroutchSpace()
+    {
+        _croutchCheckRay = new Ray(player.transform.TransformPoint(CrouchedState.TopPosition), transform.up);
+        RaycastHit hit;
+        bool a = !Physics.Raycast(_croutchCheckRay, out hit, _croutchCheckDistance);
+        return a;
+    }
+
     public static void LockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -95,11 +139,13 @@ public class PlayerMovement : MonoBehaviour {
 }
 
 [System.Serializable]
-public struct CharacterControllerPreset
+public class CharacterControllerPreset
 {
     public float Height;
     public Vector3 Center;
     public Vector3 CameraPositionLocalSpace;
+    [System.NonSerialized]
+    public Vector3 TopPosition;
     public float MoveSpeedModifier;
 
     public CharacterControllerPreset(float height, Vector3 center, Vector3 cameraPositionLocal) : this(height, center, cameraPositionLocal, 1) {}
@@ -110,5 +156,15 @@ public struct CharacterControllerPreset
         Center = center;
         CameraPositionLocalSpace = cameraPositionLocal;
         MoveSpeedModifier = moveSpeedModifier;
+
+        CalculateTopPosition();
+    }
+
+    /// <summary>
+    /// Calculate the top of the collider.
+    /// </summary>
+    public void CalculateTopPosition()
+    {
+        TopPosition = new Vector3(0, Height / 2 + Center.y, 0);
     }
 }

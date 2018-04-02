@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33374891368422190}
   - component: {fileID: 23812802067590308}
   - component: {fileID: 65574292866448850}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor Curve
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -22,7 +22,8 @@ GameObject:
   - component: {fileID: 33971638011282060}
   - component: {fileID: 23933550390396146}
   - component: {fileID: 64817986683452874}
-  m_Layer: 0
+  - component: {fileID: 65824953842285020}
+  m_Layer: 8
   m_Name: Vent Part
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,3 +96,15 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: e678140ab96d2a94687fb68f2b3ead93, type: 3}
+--- !u!65 &65824953842285020
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1875560404088092}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.31935, y: 1.0000005, z: 0.1514822}
+  m_Center: {x: 0.000000059604638, y: 0.5, z: 1.0722423}

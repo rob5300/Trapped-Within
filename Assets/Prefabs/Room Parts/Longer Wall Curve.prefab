@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33721523843605634}
   - component: {fileID: 23333595531509000}
   - component: {fileID: 64973849147014830}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Longer Wall Curve
   m_TagString: Untagged
   m_Icon: {fileID: 0}

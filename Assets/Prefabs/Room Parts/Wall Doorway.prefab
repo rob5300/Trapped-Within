@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33289369158572020}
   - component: {fileID: 23738803910776578}
   - component: {fileID: 64575951943740854}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall Doorway
   m_TagString: Untagged
   m_Icon: {fileID: 0}

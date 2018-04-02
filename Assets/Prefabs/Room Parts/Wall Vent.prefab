@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33229451034308512}
   - component: {fileID: 23636880241308592}
   - component: {fileID: 64299083108296650}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall Vent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
