@@ -28,7 +28,7 @@ namespace Entity
             }
         }
         [SerializeField]
-        private bool interactable = false;
+        private bool interactable = true;
 
         public new void Start()
         {
@@ -39,7 +39,7 @@ namespace Entity
                 occlusionPortal = GetComponentInChildren<OcclusionPortal>();
             }
 
-            occlusionPortal.open = Open;
+            if(occlusionPortal) occlusionPortal.open = Open;
             closer = gameObject.AddComponent<DoorCloser>();
             closer.door = this;
             closer.enabled = false;
@@ -48,7 +48,7 @@ namespace Entity
         public void OpenDoor()
         {
             Open = true;
-            occlusionPortal.open = true;
+            if(occlusionPortal) occlusionPortal.open = true;
             animator.SetTrigger("Open");
             closer.enabled = true;
         }
@@ -84,7 +84,7 @@ namespace Entity
 
         private void DisablePortal()
         {
-            if(!Open) occlusionPortal.open = false;
+            if(!Open && occlusionPortal) occlusionPortal.open = false;
         }
     } 
 }

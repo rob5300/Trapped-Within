@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Entity
 {
-    public class VentCover : MoveableEntity
+    public class BoltedCover : MoveableEntity
     {
         public int AttachedScrews = 0;
         private Rigidbody rigidbody;

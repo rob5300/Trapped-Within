@@ -42,4 +42,9 @@ public class LockedDoor : Door, IItemInteract
         animator.SetTrigger("DoorLocked");
         return false;
     }
+
+    public void Reset()
+    {
+        InteractOpensDoor = true;
+    }
 }

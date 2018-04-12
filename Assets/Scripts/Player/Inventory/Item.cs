@@ -20,6 +20,7 @@ namespace Items
         public string Name;
         public string Description;
         public GameObject EntityGameObject;
+        public TransformOffset EquipOffset;
         public bool Equipable = true;
         public bool CanDrop = false;
 
@@ -36,6 +37,18 @@ namespace Items
         public virtual void OnItemUse(GameObject heldItem, Player player, bool successful)
         {
             
+        }
+    }
+
+    public struct TransformOffset
+    {
+        public Vector3 Position;
+        public Vector3 RotationEuler;
+
+        public TransformOffset(Vector3 position, Vector3 rotationEuler) 
+        {
+            Position = position;
+            RotationEuler = rotationEuler;
         }
     }
 }

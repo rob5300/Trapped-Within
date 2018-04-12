@@ -43,6 +43,7 @@ namespace Items
                         GameObject newob = Object.Instantiate<GameObject>(_itemslots[slot].Item.EntityGameObject,
                             player.HoldPoint.position, player.HoldPoint.rotation,
                             player.HoldPoint);
+                        newob.transform.localRotation = Quaternion.Euler(0, 0, 0);
                         Rigidbody rb = newob.GetComponent<Rigidbody>();
                         if (rb)
                         {
@@ -55,6 +56,7 @@ namespace Items
                         //This was an object that was in the scene.
                         _itemslots[slot].Item.EntityGameObject.transform.parent = player.HoldPoint;
                         _itemslots[slot].Item.EntityGameObject.transform.localPosition = Vector3.zero;
+                        _itemslots[slot].Item.EntityGameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
                         Rigidbody rb = _itemslots[slot].Item.EntityGameObject.GetComponent<Rigidbody>();
                         if (rb)
                         {
@@ -63,6 +65,10 @@ namespace Items
                         player.HeldObject = _itemslots[slot].Item.EntityGameObject;
                         player.HeldObject.SetActive(true);
                     }
+                    //Apply item transform offset values
+                    player.HeldObject.transform.position += GetEquippedItem().EquipOffset.Position;
+                    player.HeldObject.transform.Rotate(GetEquippedItem().EquipOffset.RotationEuler);
+
                     //Change the items layer to prevent it from being raycast
                     EquippedItemsLayer = _itemslots[slot].Item.EntityGameObject.layer;
                     _itemslots[slot].Item.EntityGameObject.layer = 2;
