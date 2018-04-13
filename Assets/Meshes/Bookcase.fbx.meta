@@ -1,20 +1,20 @@
 fileFormatVersion: 2
-guid: 2b131bd193bd9754bb29420445ad1e08
-timeCreated: 1523533190
+guid: f099be86a7f721d469e7094e4fcdfd9d
+timeCreated: 1523649889
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Door L
+    100002: Door
     400000: //RootNode
-    400002: Door L
+    400002: Door
     2300000: //RootNode
-    2300002: Door L
+    2300002: Door
     3300000: //RootNode
-    3300002: Door L
+    3300002: Door
     4300000: Bookshelf
-    4300002: Door L
+    4300002: Door
   materials:
     importMaterials: 1
     materialName: 0
