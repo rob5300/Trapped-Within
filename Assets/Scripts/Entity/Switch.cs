@@ -5,6 +5,7 @@ public class Switch : MonoBehaviour, IInteractable {
 
     public bool IsOn = false;
     public bool CanBeDeactivated = false;
+    public float EventCallDelay = 2f;
     public UnityEvent OnActivated;
     public UnityEvent OnDeactivated;
 
@@ -31,14 +32,24 @@ public class Switch : MonoBehaviour, IInteractable {
         if (!IsOn)
         {
             IsOn = true;
-            OnActivated.Invoke();
             if (animator) animator.SetTrigger("Activated");
+            else Invoke("Activated", EventCallDelay);
         }
         else if (CanBeDeactivated)
         {
             IsOn = false;
-            OnDeactivated.Invoke();
             if (animator) animator.SetTrigger("Deactivated");
+            else Invoke("Deactivated", EventCallDelay);
         }
+    }
+
+    void Activated()
+    {
+        OnActivated.Invoke();
+    }
+
+    void Deactivated()
+    {
+        OnDeactivated.Invoke();
     }
 }

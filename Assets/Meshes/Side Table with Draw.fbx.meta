@@ -1,20 +1,25 @@
 fileFormatVersion: 2
-guid: 88bab5177fc770a43ac0e071dace4bc6
-timeCreated: 1520348257
+guid: d5809d40d367db74ea27c8f37f3eb0e6
+timeCreated: 1523644883
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: Lid
-    100002: //RootNode
-    400000: Lid
-    400002: //RootNode
-    2300000: Lid
-    2300002: //RootNode
-    3300000: Lid
-    3300002: //RootNode
-    4300000: Box
-    4300002: Lid
+    100000: //RootNode
+    100002: Table Draw Large
+    100004: Table Draw Small
+    400000: //RootNode
+    400002: Table Draw Large
+    400004: Table Draw Small
+    2300000: //RootNode
+    2300002: Table Draw Large
+    2300004: Table Draw Small
+    3300000: //RootNode
+    3300002: Table Draw Large
+    3300004: Table Draw Small
+    4300000: Side table
+    4300002: Table Draw Large
+    4300004: Table Draw Small
   materials:
     importMaterials: 1
     materialName: 0
@@ -50,7 +55,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
@@ -59,7 +64,7 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

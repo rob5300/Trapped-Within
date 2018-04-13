@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23247131258214318}
   - component: {fileID: 65308377214268764}
   - component: {fileID: 54183095514135742}
-  - component: {fileID: 114512719786957162}
+  - component: {fileID: 114103683588812854}
   m_Layer: 0
   m_Name: Book
   m_TagString: Untagged
@@ -110,7 +110,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04247616, y: 0.351822, z: 0.24}
   m_Center: {x: 0, y: 0.175911, z: -0.12}
---- !u!114 &114512719786957162
+--- !u!114 &114103683588812854
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -118,15 +118,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1984451873161940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21fae395d9260e6478bc375490de508f, type: 3}
+  m_Script: {fileID: 11500000, guid: e0a4138f53148d749840dd5f6ea77593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  ID: Book
-  Activated: 0
-  interactable: 1
-  OnActivation:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+  Name: Book
+  Description: A Book
+  Moveable: 1
