@@ -21,28 +21,43 @@ namespace Entity
         [SerializeField]
         private bool _interactable = true;
         public bool IsOpen = false;
+        public bool Locked = false;
+
+        private Animator animator;
+
+        public void Start()
+        {
+            animator = GetComponent<Animator>();
+        }
 
         public void OnInteract(Player player)
         {
-            IsOpen = !IsOpen;
-            if (IsOpen)
+            if (!Locked)
             {
-                Open();
+                IsOpen = !IsOpen;
+                if (IsOpen)
+                {
+                    Open();
+                }
+                else
+                {
+                    Close();
+                } 
             }
             else
             {
-                Close();
+                animator.SetTrigger("Locked");
             }
         }
 
         public void Open()
         {
-            GetComponent<Animator>().SetTrigger("Open");
+            animator.SetTrigger("Open");
         }
 
         public void Close()
         {
-            GetComponent<Animator>().SetTrigger("Close");
+            animator.SetTrigger("Close");
         }
     }
 }

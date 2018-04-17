@@ -52,7 +52,7 @@ public class Box : Entity.Entity, IItemInteract, IInteractable {
 
     public void Open()
     {
-        if (!IsLocked && animator)
+        if (animator)
         {
             animator.SetTrigger("Open");
             IsOpen = true;
@@ -61,7 +61,7 @@ public class Box : Entity.Entity, IItemInteract, IInteractable {
 
     public void Close()
     {
-        if (!IsLocked && animator)
+        if (animator)
         {
             animator.SetTrigger("Close");
             IsOpen = false;

@@ -57,7 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b971f6f66f5731545aed8c46cf6a591c, type: 2}
+  - {fileID: 2100000, guid: a7925bfc149c4e34b8e7e56999e76cee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -121,5 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da2e6eef3faa2a3438bf221c75a5ca5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
+  Description: 
+  Moveable: 1
   _interactable: 1
   CraftedKeyId: Default

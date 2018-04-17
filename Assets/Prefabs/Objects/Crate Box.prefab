@@ -171,7 +171,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1880733528314698}
   m_LocalRotation: {x: -0, y: 0.27668056, z: -0, w: 0.960962}
-  m_LocalPosition: {x: -4.759064, y: 0.145, z: 0.47449845}
+  m_LocalPosition: {x: -17.519, y: 0.42715, z: 10.264}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4111388854855340}
@@ -235,7 +235,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: caffbffe640e61c408576aa362a60fec, type: 2}
+  - {fileID: 2100000, guid: 869b32097a1f4f6478760242ee7d1cb7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -349,4 +349,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Crate
   Description: 
-  Movable: 1
+  Moveable: 1

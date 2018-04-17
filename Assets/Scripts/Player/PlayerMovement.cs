@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour {
 	public void Update () {
         if (DoRotation) Rotation();
         if (DoMovement) Movement();
+        else if (Crouched) TryUnCroutch();
 
         if (_tryUncroutch && Crouched)
         {
@@ -86,6 +87,16 @@ public class PlayerMovement : MonoBehaviour {
         _desiredMove = Vector3.ProjectOnPlane(_desiredMove, hitInfo.normal).normalized;
 
         _charController.SimpleMove(_desiredMove * (MoveSensitivity * CurrentState.MoveSpeedModifier));
+
+        //Croutching
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Croutch();
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            TryUnCroutch();
+        }
     }
 
     public void ApplyControllerPreset(CharacterControllerPreset preset)

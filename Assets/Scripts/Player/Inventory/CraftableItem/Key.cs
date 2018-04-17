@@ -15,6 +15,7 @@ namespace Items
         {
             EntityGameObject = Resources.Load<GameObject>("CraftableItems/Key");
             CanDrop = true;
+            EquipOffset = new TransformOffset(new Vector3(0, 0, -0.03f), new Vector3(0, 180, 0));
         }
 
         public Key(string name) : this()

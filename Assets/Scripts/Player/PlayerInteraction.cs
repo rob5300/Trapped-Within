@@ -201,14 +201,6 @@ public class PlayerInteraction : MonoBehaviour
         {
             Ui.Escape();
         }
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            player.movement.Croutch();
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftControl))
-        {
-            player.movement.TryUnCroutch();
-        }
         //Entity Moving
         MoveEntity(Input.GetMouseButton(1));
     }
