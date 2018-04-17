@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousColorSigma: 1
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
-  m_LightingDataAsset: {fileID: 112000916, guid: 9050ff25b137c524aa7a2cb40be6385b,
+  m_LightingDataAsset: {fileID: 112001038, guid: 9050ff25b137c524aa7a2cb40be6385b,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -30169,7 +30169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1354812330
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class MainMenuUI : MonoBehaviour {
 
     public void StartGameButton()
     {
-        SceneManager.LoadScene("1st Floor");
+        Game.LoadLevel("Cutscene", "Intro");
     }
 
     public void ExitGameButton()

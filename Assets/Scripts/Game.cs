@@ -8,6 +8,11 @@ using UnityEngine;
 public static class Game {
 
     public static Task InitialTask = new Task("How did i get here?", "Make your way out of the room.");
+    public static GameObject LoadingScreen { get { return GetLoadingScreen(); } }
+    public static LoadingScreen LoadingScreenComponent { get { return GetLoadingScreenComponent(); } }
+
+    private static GameObject _loadingScreen;
+    private static LoadingScreen _loadingScreenComponent;
 
     public static void Pause()
     {
@@ -19,5 +24,26 @@ public static class Game {
         Time.timeScale = 1;
     }
 
-    
+    public static void LoadLevel(string LevelName, string loadText)
+    {
+        LoadingScreen.SetActive(true);
+        LoadingScreenComponent.LoadingText.text = "Loading:\n" + loadText;
+        LoadingScreenComponent.LoadScene(LevelName);
+    }
+
+    private static GameObject GetLoadingScreen()
+    {
+        if (!_loadingScreen)
+        {
+            _loadingScreen = GameObject.FindWithTag("LoadingScreen");
+            if (!_loadingScreen) _loadingScreen = Object.Instantiate(Resources.Load<GameObject>("LoadingScreen"));
+        }
+        return _loadingScreen;
+    }
+
+    private static LoadingScreen GetLoadingScreenComponent()
+    {
+        if(!_loadingScreenComponent) _loadingScreenComponent = GetLoadingScreen().GetComponent<LoadingScreen>();
+        return _loadingScreenComponent;
+    }
 }

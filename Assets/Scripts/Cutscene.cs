@@ -3,10 +3,9 @@ using UnityEngine;
 
 public class Cutscene : MonoBehaviour {
 
-    public GameObject BlackFade;
-
-    private void Awake()
+    public void LoadLevel()
     {
-        
+        Game.LoadLevel("1st Floor", "Game Level");
     }
+
 }

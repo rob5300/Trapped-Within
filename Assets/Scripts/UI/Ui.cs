@@ -281,7 +281,7 @@ public static class Ui
 
     public static void ToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        Game.LoadLevel("MainMenu", "Main Menu");
         PauseMenuVisible = false;
         //Reset time back to 1.
         Time.timeScale = 1;
