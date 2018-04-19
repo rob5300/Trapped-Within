@@ -13,11 +13,13 @@ public class Box : Entity.Entity, IItemInteract, IInteractable {
     public bool IsOpen = false;
 
     private Animator animator;
+    private AudioSource audio;
 
     public void Start()
     {
         base.Start();
         animator = GetComponent<Animator>();
+        audio = GetComponent<AudioSource>();
     }
 
     public bool OnItemInteract(Item item, Player player)
@@ -42,12 +44,15 @@ public class Box : Entity.Entity, IItemInteract, IInteractable {
             if (IsOpen) Close();
             else Open();
         }
+        else
+        {
+            if(!audio.isPlaying) audio.Play();
+        }
     }
 
     protected void Unlock()
     {
         IsLocked = false;
-        //Play a sound, animate ect.
     }
 
     public void Open()

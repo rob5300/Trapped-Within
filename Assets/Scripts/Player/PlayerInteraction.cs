@@ -29,6 +29,7 @@ public class PlayerInteraction : MonoBehaviour
     private float _timeOnObject;
     private GameObject _lookAtObject;
     private bool _lookatActive = false;
+    private EndWindowExit end;
 
     public void Awake()
     {
@@ -76,6 +77,12 @@ public class PlayerInteraction : MonoBehaviour
             IItemInteract itemInteract =
                 interactHit.transform.GetComponent<IItemInteract>() ??
                 interactHit.transform.GetComponentInParent<IItemInteract>();
+            //Check for end game area
+            EndWindowExit exitW = interactHit.transform.GetComponent<EndWindowExit>() ??
+                interactHit.transform.GetComponentInParent<EndWindowExit>();
+            if (!end) end = exitW;
+            if(end) end.EndText.gameObject.SetActive(exitW != null);
+
             if (moveableEntity != null)
             {
                 //If this a moveable entity.

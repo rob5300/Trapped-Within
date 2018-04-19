@@ -9,8 +9,11 @@ public class TaskAssignArea : MonoBehaviour
 
     public void OnTriggerEnter(Collider col)
     {
-        Player.instance.TaskManager.SetCurrentTask(TaskToAssign);
-        Destroy(this);
+        if (col.GetComponent<Player>())
+        {
+            Player.instance.TaskManager.SetCurrentTask(TaskToAssign);
+            Destroy(this); 
+        }
     }
 
     public void Reset()

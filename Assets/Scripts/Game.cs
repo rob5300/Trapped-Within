@@ -11,6 +11,8 @@ public static class Game {
     public static GameObject LoadingScreen { get { return GetLoadingScreen(); } }
     public static LoadingScreen LoadingScreenComponent { get { return GetLoadingScreenComponent(); } }
 
+    public static string CurrentScene = "MainMenu";
+
     private static GameObject _loadingScreen;
     private static LoadingScreen _loadingScreenComponent;
 
@@ -28,6 +30,7 @@ public static class Game {
     {
         LoadingScreen.SetActive(true);
         LoadingScreenComponent.LoadingText.text = "Loading:\n" + loadText;
+        CurrentScene = LevelName;
         LoadingScreenComponent.LoadScene(LevelName);
     }
 

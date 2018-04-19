@@ -21,13 +21,14 @@ public class LoadingScreen : MonoBehaviour {
 
     public void LoadScene(string sceneName)
     {
-        StartCoroutine(LoadAsync(sceneName));
-        LoadingProgress.value = 0;
         animator.SetTrigger("FadeIn");
+        LoadingProgress.value = 0;
+        StartCoroutine(LoadAsync(sceneName));
     }
 
     IEnumerator LoadAsync(string sceneName)
     {
+        yield return new WaitForFixedUpdate();
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         while (!asyncLoad.isDone)
         {

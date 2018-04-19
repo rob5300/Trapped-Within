@@ -2,6 +2,7 @@
 using System.IO;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 [Serializable]
 public class Configuration
@@ -51,6 +52,22 @@ public class Configuration
         return _configuration;
     }
 
+    /// <summary>
+    /// Do not construct as there is no method to save a custom config instance. This exists for System.XML functionality.
+    /// </summary>
+    public Configuration() { }
+
     //Instance Members
-    
+    public float MusicVolume = 0;
+    public float EffectsVolume = 0;
+
+    public AntialiasingModel.Method AAMode = AntialiasingModel.Method.Taa;
+    public bool AntiAliasingEnabled = true;
+    public bool AmbientOcclusion = true;
+    public bool Bloom = true;
+    public bool ColourGrading = true;
+    public bool Vignette = true;
+    public bool MotionBlur = false;
+    public bool ScreenSpaceReflections = false;
+
 }

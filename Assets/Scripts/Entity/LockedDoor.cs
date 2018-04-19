@@ -9,9 +9,20 @@ public class LockedDoor : Door, IItemInteract
     public string KeyId = "";
     public bool Locked = true;
 
+    private AudioSource audio;
+
+    public void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+    }
+
     public override void OnInteract(Player player)
     {
-        if (Locked) animator.SetTrigger("DoorLocked");
+        if (Locked)
+        {
+            animator.SetTrigger("DoorLocked");
+            if (!audio.isPlaying) audio.Play();
+        }
         else if (InteractOpensDoor)
         {
             ToggleState();
@@ -40,6 +51,7 @@ public class LockedDoor : Door, IItemInteract
             }
         }
         animator.SetTrigger("DoorLocked");
+        if (!audio.isPlaying) audio.Play();
         return false;
     }
 

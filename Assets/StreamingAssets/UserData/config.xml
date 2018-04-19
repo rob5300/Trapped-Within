@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <MusicVolume>0</MusicVolume>
+  <EffectsVolume>0</EffectsVolume>
+  <AAMode>Taa</AAMode>
+  <AntiAliasingEnabled>false</AntiAliasingEnabled>
+  <AmbientOcclusion>false</AmbientOcclusion>
+  <Bloom>false</Bloom>
+  <ColourGrading>false</ColourGrading>
+  <Vignette>false</Vignette>
+  <MotionBlur>false</MotionBlur>
+  <ScreenSpaceReflections>false</ScreenSpaceReflections>
+</Configuration>

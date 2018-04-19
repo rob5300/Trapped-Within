@@ -40,6 +40,7 @@ public class UIMonoHelper : MonoBehaviour
     public Button ViewButton;
 
     public Text HintText;
+    public EndCutscene EndGameCutscene;
 
     public UIMonoHelper()
     {

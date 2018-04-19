@@ -24,10 +24,12 @@ namespace Entity
         public bool Locked = false;
 
         private Animator animator;
+        private AudioSource audio;
 
         public void Start()
         {
             animator = GetComponent<Animator>();
+            audio = GetComponentInParent<AudioSource>();
         }
 
         public void OnInteract(Player player)
@@ -47,6 +49,7 @@ namespace Entity
             else
             {
                 animator.SetTrigger("Locked");
+                if (!audio.isPlaying) audio.Play();
             }
         }
 

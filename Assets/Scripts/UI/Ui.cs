@@ -312,4 +312,10 @@ public static class Ui
     {
         if(LevelStartUIDismissed != null) LevelStartUIDismissed.Invoke();
     }
+
+    public static void EndGame()
+    {
+        UIMonoHelper.Instance.EndGameCutscene.gameObject.SetActive(true);
+        UIMonoHelper.Instance.EndGameCutscene.StartSequence();
+    }
 }
