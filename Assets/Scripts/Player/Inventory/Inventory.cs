@@ -36,6 +36,8 @@ namespace Items
             {
                 if (_itemslots[slot].Item.Equipable && _itemslots[slot].Item.EntityGameObject != null)
                 {
+                    if (EquippedItem != null) UnequipItem();
+
                     EquippedItem = slot;
                     //If this is a prefab then we instantiate it.
                     if (!_itemslots[slot].Item.EntityGameObject.scene.isLoaded)

@@ -3526,6 +3526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Description: 
+  IsItem: 0
   Open: 0
   InteractOpensDoor: 0
   occlusionPortal: {fileID: 960032265}
@@ -3944,6 +3945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Description: 
+  IsItem: 0
   Open: 0
   InteractOpensDoor: 0
   occlusionPortal: {fileID: 809073567}
@@ -4329,7 +4331,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4683361501381432, guid: 56ef7e6618e29254688b99501ce5ba5b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.74
+      value: -1.203
       objectReference: {fileID: 0}
     - target: {fileID: 4683361501381432, guid: 56ef7e6618e29254688b99501ce5ba5b, type: 2}
       propertyPath: m_LocalPosition.y
@@ -4337,7 +4339,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4683361501381432, guid: 56ef7e6618e29254688b99501ce5ba5b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 2.62
+      value: 2.807
       objectReference: {fileID: 0}
     - target: {fileID: 4683361501381432, guid: 56ef7e6618e29254688b99501ce5ba5b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -7823,7 +7825,7 @@ Prefab:
     - target: {fileID: 65462862000709098, guid: 0623102013405824291d7e7967730353,
         type: 2}
       propertyPath: m_Size.y
-      value: 0.05350668
+      value: 0.11458631
       objectReference: {fileID: 0}
     - target: {fileID: 65462862000709098, guid: 0623102013405824291d7e7967730353,
         type: 2}
@@ -7833,12 +7835,12 @@ Prefab:
     - target: {fileID: 65462862000709098, guid: 0623102013405824291d7e7967730353,
         type: 2}
       propertyPath: m_Center.y
-      value: -0.6927405
+      value: -0.66220385
       objectReference: {fileID: 0}
     - target: {fileID: 65462862000709098, guid: 0623102013405824291d7e7967730353,
         type: 2}
       propertyPath: m_Center.z
-      value: 0.122079745
+      value: 0.12208015
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0623102013405824291d7e7967730353, type: 2}
@@ -16202,6 +16204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Description: 
+  IsItem: 0
   Open: 0
   InteractOpensDoor: 1
   occlusionPortal: {fileID: 643205882}
@@ -17285,6 +17288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Description: 
+  IsItem: 0
   Open: 0
   InteractOpensDoor: 1
   occlusionPortal: {fileID: 668468936}
@@ -21237,6 +21241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Description: 
+  IsItem: 0
   Open: 0
   InteractOpensDoor: 1
   occlusionPortal: {fileID: 763606096}
@@ -26330,6 +26335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Description: 
+  IsItem: 0
   Open: 0
   InteractOpensDoor: 1
   occlusionPortal: {fileID: 1026691551}
@@ -27274,6 +27280,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1726947294}
         m_MethodName: Open
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1726947294}
+        m_MethodName: Unlock
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -30143,6 +30160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Description: 
+  IsItem: 0
   _interactable: 0
   KeyId: 
   IsLocked: 1
@@ -30912,6 +30930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Description: 
+  IsItem: 0
   Open: 0
   InteractOpensDoor: 1
   occlusionPortal: {fileID: 1949848546}
@@ -34170,6 +34189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Description: 
+  IsItem: 0
   Moveable: 0
   AttachedScrews: 4
 --- !u!1 &1340162465
@@ -34474,7 +34494,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1354812330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38160,6 +38180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Book
   Description: 
+  IsItem: 0
   Activated: 0
   interactable: 1
   OnActivation:
@@ -40744,6 +40765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Description: 
+  IsItem: 0
   Open: 0
   InteractOpensDoor: 1
   occlusionPortal: {fileID: 2132797076}
@@ -42069,7 +42091,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1641538264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.75, y: -2.272, z: 0}
+  m_LocalPosition: {x: -1.75, y: -2.268, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 118723949}
@@ -43972,6 +43994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Description: 
+  IsItem: 0
   Moveable: 1
 --- !u!54 &1688871957
 Rigidbody:
@@ -49211,6 +49234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Carpet
   Description: 
+  IsItem: 0
   _interactable: 1
   HiddenObject: {fileID: 754187650}
   PulledUp: 0
@@ -54218,7 +54242,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4194878543183420, guid: 40e990f80a291bd4ea7044ae2218d77a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.49905336
+      value: 0.522
       objectReference: {fileID: 0}
     - target: {fileID: 4194878543183420, guid: 40e990f80a291bd4ea7044ae2218d77a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -54249,6 +54273,26 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a7925bfc149c4e34b8e7e56999e76cee, type: 2}
+    - target: {fileID: 65947397019631328, guid: 40e990f80a291bd4ea7044ae2218d77a,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.061650753
+      objectReference: {fileID: 0}
+    - target: {fileID: 65947397019631328, guid: 40e990f80a291bd4ea7044ae2218d77a,
+        type: 2}
+      propertyPath: m_Center.y
+      value: -0.01148057
+      objectReference: {fileID: 0}
+    - target: {fileID: 65947397019631328, guid: 40e990f80a291bd4ea7044ae2218d77a,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.12691116
+      objectReference: {fileID: 0}
+    - target: {fileID: 65947397019631328, guid: 40e990f80a291bd4ea7044ae2218d77a,
+        type: 2}
+      propertyPath: m_Center.x
+      value: 0.09161949
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40e990f80a291bd4ea7044ae2218d77a, type: 2}
   m_IsPrefabParent: 0

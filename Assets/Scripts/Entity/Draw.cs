@@ -56,11 +56,18 @@ namespace Entity
         public void Open()
         {
             animator.SetTrigger("Open");
+            IsOpen = true;
         }
 
         public void Close()
         {
             animator.SetTrigger("Close");
+            IsOpen = false;
+        }
+
+        public void Unlock()
+        {
+            Locked = false;
         }
     }
 }

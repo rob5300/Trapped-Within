@@ -292,6 +292,11 @@ public static class Ui
         UIMonoHelper.Instance.GrabIcon.SetActive(visibility);
     }
 
+    public static void SetItemVisibility(bool visibility)
+    {
+        UIMonoHelper.Instance.BagIcon.SetActive(visibility);
+    }
+
     public static void ItemSlotClicked(int slot)
     {
         CurrentItemSlot = slot;

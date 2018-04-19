@@ -184,7 +184,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Lightbulb
   Description: A lightbulb compatible with the fittings in this house.
-  Movable: 1
+  IsItem: 1
+  Moveable: 1
   _interactable: 1
 --- !u!136 &136119896049785444
 CapsuleCollider:

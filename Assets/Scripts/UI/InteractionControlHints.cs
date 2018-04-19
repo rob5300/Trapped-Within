@@ -30,7 +30,7 @@ public class InteractionControlHints : MonoBehaviour
     {
         if (!doUpdate) return;
 
-        if (Time.unscaledTime > beginTime + BeginDelay)
+        if (Time.unscaledTime > beginTime + BeginDelay && !Ui.PauseMenuVisible)
         {
             doFadeIn = true;
             beginTime = Time.unscaledTime;

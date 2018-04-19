@@ -88,6 +88,8 @@ public class PlayerInteraction : MonoBehaviour
                 //If this a moveable entity.
                 Ui.SetMoveableEntityVisibility(true);
 
+                Ui.SetItemVisibility(moveableEntity.IsItem);
+
                 if (_lookAtObject == moveableEntity.gameObject && DrawOutline)
                 {
                     _timeOnObject += Time.deltaTime;
@@ -152,6 +154,7 @@ public class PlayerInteraction : MonoBehaviour
                 _lookAtObject = null;
                 _lookatActive = false;
                 Ui.SetMoveableEntityVisibility(false);
+                Ui.SetItemVisibility(false);
             }
 
             //Timer has been met, add outline.

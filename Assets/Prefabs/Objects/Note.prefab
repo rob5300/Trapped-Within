@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Old Note
   Description: An old note with a clue on it.
+  IsItem: 1
   _interactable: 1
   Contents:
   - If you are reading this, then you need to get out of here... \nStuff is hidden

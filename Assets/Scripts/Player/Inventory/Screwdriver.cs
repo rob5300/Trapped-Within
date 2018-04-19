@@ -7,7 +7,7 @@
 
         public Screwdriver()
         {
-
+            Equipable = true;
         }
     }
 }

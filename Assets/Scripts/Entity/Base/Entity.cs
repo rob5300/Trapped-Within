@@ -8,6 +8,7 @@ namespace Entity
     {
         public string Name;
         public string Description;
+        public bool IsItem = false;
 
         public void Start()
         {

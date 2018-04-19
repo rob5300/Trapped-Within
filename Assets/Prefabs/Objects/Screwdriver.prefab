@@ -111,7 +111,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Screwdriver
   Description: 
-  Movable: 1
+  IsItem: 1
+  Moveable: 1
   interactable: 1
 --- !u!136 &136904967773391416
 CapsuleCollider:

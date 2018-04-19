@@ -152,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Description: 
+  IsItem: 0
   Moveable: 1
   KeyId: 
   interactable: 1
