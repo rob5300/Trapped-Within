@@ -3530,7 +3530,7 @@ MonoBehaviour:
   Open: 0
   InteractOpensDoor: 0
   occlusionPortal: {fileID: 960032265}
-  interactable: 0
+  interactable: 1
   KeyId: 1
   Locked: 1
 --- !u!1001 &122232018
@@ -10334,6 +10334,7 @@ Transform:
   - {fileID: 717056582}
   - {fileID: 1026691550}
   - {fileID: 163473627}
+  - {fileID: 1348012056}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -34413,6 +34414,55 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5af5bff9923c7604a83c6298f8cc7ad5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1348012055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1348012056}
+  - component: {fileID: 1348012057}
+  m_Layer: 0
+  m_Name: Light Probe Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1348012056
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1348012055}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.424, y: -0.25, z: -2.16}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 408583373}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!220 &1348012057
+LightProbeGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1348012055}
+  m_Enabled: 1
+  m_SourcePositions:
+  - {x: 0.85595703, y: 1, z: 1.0211601}
+  - {x: 0.17952535, y: -0.5528717, z: -1.1266947}
+  - {x: 0.85595703, y: -1, z: 1.0211601}
+  - {x: 0.9383049, y: -0.75895405, z: -1.1266947}
+  - {x: -1, y: 1, z: 1}
+  - {x: -7.5517273, y: 0.2643237, z: -8.592581}
+  - {x: -1, y: -1, z: 1}
+  - {x: -0.59349823, y: -0.75895405, z: -1}
+  - {x: 0.9383049, y: 1, z: -1.1266947}
+  - {x: 0.17952535, y: 0.66454697, z: -1.1266947}
+  - {x: -0.59349823, y: 1, z: -1}
+  - {x: -7.5517273, y: 0.2643237, z: -8.145052}
 --- !u!1001 &1351325649
 Prefab:
   m_ObjectHideFlags: 0
@@ -34494,7 +34544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1354812330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46088,7 +46138,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4015292880081776, guid: 1292b59c659126445a5ee4b90d60844b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: -0.547
       objectReference: {fileID: 0}
     - target: {fileID: 4015292880081776, guid: 1292b59c659126445a5ee4b90d60844b, type: 2}
       propertyPath: m_LocalPosition.z
